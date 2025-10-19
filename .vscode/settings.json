@@ -1,4 +1,10 @@
 {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "xaver.clang-format"
+    "editor.defaultFormatter": "xaver.clang-format",
+    "files.associations": {
+        "options": "makefile",
+        "mk_line_pha.C": "cpp",
+        "test.C": "cpp",
+        "dense": "cpp"
+    }
 }

@@ -1,0 +1,3 @@
+/home/zwxdogs/work/USP/build/CMakeFiles/USP.dir
+/home/zwxdogs/work/USP/build/CMakeFiles/edit_cache.dir
+/home/zwxdogs/work/USP/build/CMakeFiles/rebuild_cache.dir

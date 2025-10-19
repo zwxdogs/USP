@@ -1,14 +1,9 @@
-// class probe for all of the probe.
+// 所有探头的基类probe
 
 class probe
 {
 private:
     long fc;
-    double kerf;
-    double pitch;
-    int N_el;
-    double width;
-    double height;
     double bandwidth;
     double focus_z;
     double focus_x;
@@ -17,14 +12,9 @@ private:
 
 public:
     // Constructor
-    probe(long fc, double kerf, double pitch, int N_el, double height, double bandwidth, double focus_z, double focus_x, double focus_y)
+    probe(long fc, double bandwidth, double focus_z, double focus_x, double focus_y)
     {
         this->fc = fc;
-        this->kerf = kerf;
-        this->pitch = pitch;
-        this->N_el = N_el;
-        this->width = pitch - kerf;
-        this->height = height;
         this->bandwidth = bandwidth;
         this->focus_z = focus_z;
         this->focus_x = focus_x;
@@ -35,5 +25,5 @@ public:
     };
 
     // Destructor
-    ~probe();
+    ~probe() { };
 };

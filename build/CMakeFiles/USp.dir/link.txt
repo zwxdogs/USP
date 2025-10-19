@@ -1,0 +1,1 @@
+/usr/bin/g++ -g CMakeFiles/USp.dir/test/test.C.o -o USp 

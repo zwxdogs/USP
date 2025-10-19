@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/zwxdogs/work/USP/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/USP.dir/test/test.C.o -c /home/zwxdogs/work/USP/test/test.C",
+  "file": "/home/zwxdogs/work/USP/test/test.C"
+}
+]
