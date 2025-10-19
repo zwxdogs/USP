@@ -5,6 +5,8 @@
         "options": "makefile",
         "mk_line_pha.C": "cpp",
         "test.C": "cpp",
-        "dense": "cpp"
-    }
+        "dense": "cpp",
+        "test_VTK.C": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabled"
 }

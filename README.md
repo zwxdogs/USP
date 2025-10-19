@@ -1,3 +1,7 @@
 # USP
-Make my first project.
-It's mainly for testing my algorithms which is use in my experiments.
+我的第一个项目。
+目标是构建一个超声代码测试流程，从而为实验算法进行前期测试。
+
+## 构建软件需求
+
+1. Eigen3
