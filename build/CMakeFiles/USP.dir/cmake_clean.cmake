@@ -1,8 +1,10 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/USP.dir/test/test.C.o"
-  "CMakeFiles/USP.dir/test/test.C.o.d"
-  "USP"
-  "USP.pdb"
+  "../bin/USP"
+  "../bin/USP.pdb"
+  "CMakeFiles/USP.dir/src/tools/VTK/point_cloud.cpp.o"
+  "CMakeFiles/USP.dir/src/tools/VTK/point_cloud.cpp.o.d"
+  "CMakeFiles/USP.dir/test/test.cpp.o"
+  "CMakeFiles/USP.dir/test/test.cpp.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

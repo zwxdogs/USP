@@ -129,29 +129,53 @@ USP/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/build
 .PHONY : USP/fast
 
-test/test.o: test/test.C.o
+src/tools/VTK/point_cloud.o: src/tools/VTK/point_cloud.cpp.o
+.PHONY : src/tools/VTK/point_cloud.o
+
+# target to build an object file
+src/tools/VTK/point_cloud.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/src/tools/VTK/point_cloud.cpp.o
+.PHONY : src/tools/VTK/point_cloud.cpp.o
+
+src/tools/VTK/point_cloud.i: src/tools/VTK/point_cloud.cpp.i
+.PHONY : src/tools/VTK/point_cloud.i
+
+# target to preprocess a source file
+src/tools/VTK/point_cloud.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/src/tools/VTK/point_cloud.cpp.i
+.PHONY : src/tools/VTK/point_cloud.cpp.i
+
+src/tools/VTK/point_cloud.s: src/tools/VTK/point_cloud.cpp.s
+.PHONY : src/tools/VTK/point_cloud.s
+
+# target to generate assembly for a file
+src/tools/VTK/point_cloud.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/src/tools/VTK/point_cloud.cpp.s
+.PHONY : src/tools/VTK/point_cloud.cpp.s
+
+test/test.o: test/test.cpp.o
 .PHONY : test/test.o
 
 # target to build an object file
-test/test.C.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/test/test.C.o
-.PHONY : test/test.C.o
+test/test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/test/test.cpp.o
+.PHONY : test/test.cpp.o
 
-test/test.i: test/test.C.i
+test/test.i: test/test.cpp.i
 .PHONY : test/test.i
 
 # target to preprocess a source file
-test/test.C.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/test/test.C.i
-.PHONY : test/test.C.i
+test/test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/test/test.cpp.i
+.PHONY : test/test.cpp.i
 
-test/test.s: test/test.C.s
+test/test.s: test/test.cpp.s
 .PHONY : test/test.s
 
 # target to generate assembly for a file
-test/test.C.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/test/test.C.s
-.PHONY : test/test.C.s
+test/test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/test/test.cpp.s
+.PHONY : test/test.cpp.s
 
 # Help Target
 help:
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... USP"
+	@echo "... src/tools/VTK/point_cloud.o"
+	@echo "... src/tools/VTK/point_cloud.i"
+	@echo "... src/tools/VTK/point_cloud.s"
 	@echo "... test/test.o"
 	@echo "... test/test.i"
 	@echo "... test/test.s"
