@@ -579,3 +579,18 @@ gmake[1]: Leaving directory '/home/zwxdogs/work/USP/build/CMakeFiles/CMakeTmp'
 
 
 
+Performing C++ SOURCE FILE Test HAS_FLTO_AUTO succeeded with the following output:
+Change Dir: /home/zwxdogs/work/USP/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_50915/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_50915.dir/build.make CMakeFiles/cmTC_50915.dir/build
+gmake[1]: Entering directory '/home/zwxdogs/work/USP/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_50915.dir/src.cxx.o
+/usr/bin/g++ -DHAS_FLTO_AUTO  -flto=auto -fno-fat-lto-objects -o CMakeFiles/cmTC_50915.dir/src.cxx.o -c /home/zwxdogs/work/USP/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_50915
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_50915.dir/link.txt --verbose=1
+/usr/bin/g++ CMakeFiles/cmTC_50915.dir/src.cxx.o -o cmTC_50915  -flto=auto 
+gmake[1]: Leaving directory '/home/zwxdogs/work/USP/build/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main() { return 0; }

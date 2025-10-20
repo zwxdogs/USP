@@ -21,7 +21,7 @@ main()
     //               << positions[i](0, 2) << ")" << std::endl;
     // }
 
-    scatterers.plot_pos();
+    scatterers.plot_pos(1);
 
     return 0;
 }

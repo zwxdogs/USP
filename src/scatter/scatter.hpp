@@ -33,8 +33,7 @@ public:
     };
 
     // 绘制点云
-    void plot_pos()
-    {
-        visualize_point_cloud(this->pos, "scatterers.vtp");
+    void plot_pos(int frame) {
+        // 通过pybind11将点数据输出到python，再通过matplotlib画图。
     };
 };

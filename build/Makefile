@@ -117,48 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named USP
+# Target rules for targets named test
 
 # Build rule for target.
-USP: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 USP
-.PHONY : USP
+test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test
+.PHONY : test
 
 # fast build rule for target.
-USP/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/build
-.PHONY : USP/fast
-
-src/tools/VTK/point_cloud.o: src/tools/VTK/point_cloud.cpp.o
-.PHONY : src/tools/VTK/point_cloud.o
-
-# target to build an object file
-src/tools/VTK/point_cloud.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/src/tools/VTK/point_cloud.cpp.o
-.PHONY : src/tools/VTK/point_cloud.cpp.o
-
-src/tools/VTK/point_cloud.i: src/tools/VTK/point_cloud.cpp.i
-.PHONY : src/tools/VTK/point_cloud.i
-
-# target to preprocess a source file
-src/tools/VTK/point_cloud.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/src/tools/VTK/point_cloud.cpp.i
-.PHONY : src/tools/VTK/point_cloud.cpp.i
-
-src/tools/VTK/point_cloud.s: src/tools/VTK/point_cloud.cpp.s
-.PHONY : src/tools/VTK/point_cloud.s
-
-# target to generate assembly for a file
-src/tools/VTK/point_cloud.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/src/tools/VTK/point_cloud.cpp.s
-.PHONY : src/tools/VTK/point_cloud.cpp.s
+test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
+.PHONY : test/fast
 
 test/test.o: test/test.cpp.o
 .PHONY : test/test.o
 
 # target to build an object file
 test/test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/test/test.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test/test.cpp.o
 .PHONY : test/test.cpp.o
 
 test/test.i: test/test.cpp.i
@@ -166,7 +142,7 @@ test/test.i: test/test.cpp.i
 
 # target to preprocess a source file
 test/test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/test/test.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test/test.cpp.i
 .PHONY : test/test.cpp.i
 
 test/test.s: test/test.cpp.s
@@ -174,7 +150,7 @@ test/test.s: test/test.cpp.s
 
 # target to generate assembly for a file
 test/test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/USP.dir/build.make CMakeFiles/USP.dir/test/test.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test/test.cpp.s
 .PHONY : test/test.cpp.s
 
 # Help Target
@@ -185,10 +161,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... USP"
-	@echo "... src/tools/VTK/point_cloud.o"
-	@echo "... src/tools/VTK/point_cloud.i"
-	@echo "... src/tools/VTK/point_cloud.s"
+	@echo "... test"
 	@echo "... test/test.o"
 	@echo "... test/test.i"
 	@echo "... test/test.s"
