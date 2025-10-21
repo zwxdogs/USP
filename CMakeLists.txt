@@ -11,7 +11,8 @@ file(GLOB SRC_FILES
     "${PROJECT_SOURCE_DIR}/src/*.hpp"
     "${PROJECT_SOURCE_DIR}/src/*.cpp")
 
-# add_executable(USP test/test.cpp src/tools/VTK/point_cloud.cpp)
 add_subdirectory(extern/pybind11)
-pybind11_add_module(test test/test.cpp)
+
+# add_executable(USP test/test.cpp src/tools/VTK/point_cloud.cpp)
+pybind11_add_module(straighjt_flow_2d bind.cpp)
 

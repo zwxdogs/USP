@@ -117,41 +117,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test
+# Target rules for targets named straighjt_flow_2d
 
 # Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test
-.PHONY : test
+straighjt_flow_2d: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 straighjt_flow_2d
+.PHONY : straighjt_flow_2d
 
 # fast build rule for target.
-test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
-.PHONY : test/fast
+straighjt_flow_2d/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/straighjt_flow_2d.dir/build.make CMakeFiles/straighjt_flow_2d.dir/build
+.PHONY : straighjt_flow_2d/fast
 
-test/test.o: test/test.cpp.o
-.PHONY : test/test.o
+bind.o: bind.cpp.o
+.PHONY : bind.o
 
 # target to build an object file
-test/test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test/test.cpp.o
-.PHONY : test/test.cpp.o
+bind.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/straighjt_flow_2d.dir/build.make CMakeFiles/straighjt_flow_2d.dir/bind.cpp.o
+.PHONY : bind.cpp.o
 
-test/test.i: test/test.cpp.i
-.PHONY : test/test.i
+bind.i: bind.cpp.i
+.PHONY : bind.i
 
 # target to preprocess a source file
-test/test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test/test.cpp.i
-.PHONY : test/test.cpp.i
+bind.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/straighjt_flow_2d.dir/build.make CMakeFiles/straighjt_flow_2d.dir/bind.cpp.i
+.PHONY : bind.cpp.i
 
-test/test.s: test/test.cpp.s
-.PHONY : test/test.s
+bind.s: bind.cpp.s
+.PHONY : bind.s
 
 # target to generate assembly for a file
-test/test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test/test.cpp.s
-.PHONY : test/test.cpp.s
+bind.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/straighjt_flow_2d.dir/build.make CMakeFiles/straighjt_flow_2d.dir/bind.cpp.s
+.PHONY : bind.cpp.s
 
 # Help Target
 help:
@@ -161,10 +161,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... test"
-	@echo "... test/test.o"
-	@echo "... test/test.i"
-	@echo "... test/test.s"
+	@echo "... straighjt_flow_2d"
+	@echo "... bind.o"
+	@echo "... bind.i"
+	@echo "... bind.s"
 .PHONY : help
 
 

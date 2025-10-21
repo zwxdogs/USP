@@ -1,1 +1,1 @@
-/usr/bin/g++ -fPIC -g -shared  -o test.cpython-310-x86_64-linux-gnu.so CMakeFiles/test.dir/test/test.cpp.o 
+/usr/bin/g++ -fPIC -g -shared  -o test.cpython-310-x86_64-linux-gnu.so CMakeFiles/test.dir/bind.cpp.o 

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/test.dir/test/test.cpp.o"
-  "CMakeFiles/test.dir/test/test.cpp.o.d"
+  "CMakeFiles/test.dir/bind.cpp.o"
+  "CMakeFiles/test.dir/bind.cpp.o.d"
   "test.cpython-310-x86_64-linux-gnu.so"
   "test.pdb"
 )

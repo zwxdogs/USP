@@ -69,28 +69,28 @@ include CMakeFiles/test.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/test.dir/flags.make
 
-CMakeFiles/test.dir/test/test.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/test/test.cpp.o: ../test/test.cpp
-CMakeFiles/test.dir/test/test.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zwxdogs/work/USP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test.dir/test/test.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/test/test.cpp.o -MF CMakeFiles/test.dir/test/test.cpp.o.d -o CMakeFiles/test.dir/test/test.cpp.o -c /home/zwxdogs/work/USP/test/test.cpp
+CMakeFiles/test.dir/bind.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/bind.cpp.o: ../bind.cpp
+CMakeFiles/test.dir/bind.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/zwxdogs/work/USP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test.dir/bind.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/bind.cpp.o -MF CMakeFiles/test.dir/bind.cpp.o.d -o CMakeFiles/test.dir/bind.cpp.o -c /home/zwxdogs/work/USP/bind.cpp
 
-CMakeFiles/test.dir/test/test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/test/test.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zwxdogs/work/USP/test/test.cpp > CMakeFiles/test.dir/test/test.cpp.i
+CMakeFiles/test.dir/bind.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/bind.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zwxdogs/work/USP/bind.cpp > CMakeFiles/test.dir/bind.cpp.i
 
-CMakeFiles/test.dir/test/test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/test/test.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zwxdogs/work/USP/test/test.cpp -o CMakeFiles/test.dir/test/test.cpp.s
+CMakeFiles/test.dir/bind.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/bind.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zwxdogs/work/USP/bind.cpp -o CMakeFiles/test.dir/bind.cpp.s
 
 # Object files for target test
 test_OBJECTS = \
-"CMakeFiles/test.dir/test/test.cpp.o"
+"CMakeFiles/test.dir/bind.cpp.o"
 
 # External object files for target test
 test_EXTERNAL_OBJECTS =
 
-test.cpython-310-x86_64-linux-gnu.so: CMakeFiles/test.dir/test/test.cpp.o
+test.cpython-310-x86_64-linux-gnu.so: CMakeFiles/test.dir/bind.cpp.o
 test.cpython-310-x86_64-linux-gnu.so: CMakeFiles/test.dir/build.make
 test.cpython-310-x86_64-linux-gnu.so: CMakeFiles/test.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/zwxdogs/work/USP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared module test.cpython-310-x86_64-linux-gnu.so"
