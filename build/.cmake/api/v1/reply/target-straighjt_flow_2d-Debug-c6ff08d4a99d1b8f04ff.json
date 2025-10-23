@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "straighjt_flow_2d.cpython-310-x86_64-linux-gnu.so"
+			"path" : "straighjt_flow_2d.cpython-313-x86_64-linux-gnu.so"
 		}
 	],
 	"backtrace" : 4,
@@ -86,7 +86,7 @@
 				{
 					"backtrace" : 5,
 					"isSystem" : true,
-					"path" : "/usr/include/python3.10"
+					"path" : "/home/zwxdogs/software/miniconda3/include/python3.13"
 				},
 				{
 					"backtrace" : 6,
@@ -114,7 +114,7 @@
 		"language" : "CXX"
 	},
 	"name" : "straighjt_flow_2d",
-	"nameOnDisk" : "straighjt_flow_2d.cpython-310-x86_64-linux-gnu.so",
+	"nameOnDisk" : "straighjt_flow_2d.cpython-313-x86_64-linux-gnu.so",
 	"paths" : 
 	{
 		"build" : ".",

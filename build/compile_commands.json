@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/zwxdogs/work/USP/build",
-  "command": "/usr/bin/g++ -Dstraighjt_flow_2d_EXPORTS -isystem /usr/include/python3.10 -isystem /home/zwxdogs/work/USP/extern/pybind11/include -g -fPIC -fvisibility=hidden -o CMakeFiles/straighjt_flow_2d.dir/bind.cpp.o -c /home/zwxdogs/work/USP/bind.cpp",
+  "command": "/usr/bin/g++ -Dstraighjt_flow_2d_EXPORTS -isystem /home/zwxdogs/software/miniconda3/include/python3.13 -isystem /home/zwxdogs/work/USP/extern/pybind11/include -g -fPIC -fvisibility=hidden -o CMakeFiles/straighjt_flow_2d.dir/bind.cpp.o -c /home/zwxdogs/work/USP/bind.cpp",
   "file": "/home/zwxdogs/work/USP/bind.cpp"
 }
 ]

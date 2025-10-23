@@ -88,6 +88,7 @@
     "python.analysis.typeCheckingMode": "off",
     "python.analysis.extraPaths": [
         "./py/probe",
-        "./py/scatter"
+        "./py/scatter",
+        "./py/probe/aperture"
     ]
 }
