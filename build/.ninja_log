@@ -1,0 +1,24 @@
+# ninja log v5
+1	461	1761229067718501831	CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_ft.cpp.o	1f558e28455d510f
+3	768	1761229068026168379	CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/implicit.cpp.o	bc3f3232490d521a
+1	800	1761229068060835033	CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_static_property.cpp.o	622d175f940b9f44
+2	822	1761229068082501691	CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/trampoline.cpp.o	8a2dfe7eb367b100
+2	876	1761229068134501671	CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/error.cpp.o	93aa571271170996
+1	967	1761229068225501635	CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_ndarray.cpp.o	e0e6fca15bc5a2ea
+0	967	1761229068225501635	CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_internals.cpp.o	beb35b98d3b40fba
+2	1018	1761229068277501615	CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/common.cpp.o	a39d026041ebf34d
+0	1057	1761229068316501600	CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_func.cpp.o	cab8b1ffd361ad1c
+1	1261	1761229068520168188	CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_enum.cpp.o	7e2969011000d72c
+0	1316	1761229068576501499	CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_type.cpp.o	5f2ccf3fb9bb4cdb
+1316	1369	1761229068628501480	libnanobind-static.a	4268b6e40ace4f4
+0	4248	1761229071501500240	CMakeFiles/test_np.dir/src/tools/test_np.cpp.o	f660aec550f3016a
+4248	4427	1761229071687833501	test_np.cpython-310-x86_64-linux-gnu.so	ef8c41bf61b125ce
+2	1105	1761230468300793313	CMakeFiles/test_np.dir/src/tools/test_np.cpp.o	f660aec550f3016a
+1105	1308	1761230468500629012	test_np.cpython-310-x86_64-linux-gnu.so	ef8c41bf61b125ce
+1	1112	1761230995300618865	CMakeFiles/test_np.dir/src/tools/test_np.cpp.o	f660aec550f3016a
+1112	1286	1761230995472618974	test_np.cpython-310-x86_64-linux-gnu.so	ef8c41bf61b125ce
+1	983	1761275479347025764	CMakeFiles/test_np.dir/src/tools/test_np.cpp.o	f660aec550f3016a
+983	1188	1761275479553825755	test_np.cpython-310-x86_64-linux-gnu.so	ef8c41bf61b125ce
+1	155	1761275497431025066	test_np.cpython-310-x86_64-linux-gnu.so	ef8c41bf61b125ce
+1	1089	1761282212481155053	CMakeFiles/test_np.dir/src/tools/test_np.cpp.o	f660aec550f3016a
+1089	1290	1761282212683555045	test_np.cpython-310-x86_64-linux-gnu.so	ef8c41bf61b125ce

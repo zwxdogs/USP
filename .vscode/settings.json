@@ -89,6 +89,7 @@
     "python.analysis.extraPaths": [
         "./py/probe",
         "./py/scatter",
-        "./py/probe/aperture"
+        "./py/scan",
+        "./py"
     ]
 }

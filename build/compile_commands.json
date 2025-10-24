@@ -1,7 +1,62 @@
 [
 {
   "directory": "/home/zwxdogs/work/USP/build",
-  "command": "/usr/bin/g++ -Dstraighjt_flow_2d_EXPORTS -isystem /home/zwxdogs/software/miniconda3/include/python3.13 -isystem /home/zwxdogs/work/USP/extern/pybind11/include -g -fPIC -fvisibility=hidden -o CMakeFiles/straighjt_flow_2d.dir/bind.cpp.o -c /home/zwxdogs/work/USP/bind.cpp",
-  "file": "/home/zwxdogs/work/USP/bind.cpp"
+  "command": "/usr/bin/g++ -Dtest_np_EXPORTS -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -o CMakeFiles/test_np.dir/src/tools/test_np.cpp.o -c /home/zwxdogs/work/USP/src/tools/test_np.cpp",
+  "file": "/home/zwxdogs/work/USP/src/tools/test_np.cpp"
+},
+{
+  "directory": "/home/zwxdogs/work/USP/build",
+  "command": "/usr/bin/g++ -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -fno-strict-aliasing -o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_internals.cpp.o -c /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_internals.cpp",
+  "file": "/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_internals.cpp"
+},
+{
+  "directory": "/home/zwxdogs/work/USP/build",
+  "command": "/usr/bin/g++ -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -fno-strict-aliasing -o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_func.cpp.o -c /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_func.cpp",
+  "file": "/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_func.cpp"
+},
+{
+  "directory": "/home/zwxdogs/work/USP/build",
+  "command": "/usr/bin/g++ -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -fno-strict-aliasing -o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_type.cpp.o -c /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_type.cpp",
+  "file": "/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_type.cpp"
+},
+{
+  "directory": "/home/zwxdogs/work/USP/build",
+  "command": "/usr/bin/g++ -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -fno-strict-aliasing -o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_enum.cpp.o -c /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_enum.cpp",
+  "file": "/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_enum.cpp"
+},
+{
+  "directory": "/home/zwxdogs/work/USP/build",
+  "command": "/usr/bin/g++ -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -fno-strict-aliasing -o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_ndarray.cpp.o -c /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_ndarray.cpp",
+  "file": "/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_ndarray.cpp"
+},
+{
+  "directory": "/home/zwxdogs/work/USP/build",
+  "command": "/usr/bin/g++ -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -fno-strict-aliasing -o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_static_property.cpp.o -c /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_static_property.cpp",
+  "file": "/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_static_property.cpp"
+},
+{
+  "directory": "/home/zwxdogs/work/USP/build",
+  "command": "/usr/bin/g++ -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -fno-strict-aliasing -o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_ft.cpp.o -c /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_ft.cpp",
+  "file": "/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_ft.cpp"
+},
+{
+  "directory": "/home/zwxdogs/work/USP/build",
+  "command": "/usr/bin/g++ -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -fno-strict-aliasing -o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/common.cpp.o -c /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/common.cpp",
+  "file": "/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/common.cpp"
+},
+{
+  "directory": "/home/zwxdogs/work/USP/build",
+  "command": "/usr/bin/g++ -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -fno-strict-aliasing -o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/error.cpp.o -c /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/error.cpp",
+  "file": "/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/error.cpp"
+},
+{
+  "directory": "/home/zwxdogs/work/USP/build",
+  "command": "/usr/bin/g++ -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -fno-strict-aliasing -o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/trampoline.cpp.o -c /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/trampoline.cpp",
+  "file": "/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/trampoline.cpp"
+},
+{
+  "directory": "/home/zwxdogs/work/USP/build",
+  "command": "/usr/bin/g++ -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -fno-strict-aliasing -o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/implicit.cpp.o -c /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/implicit.cpp",
+  "file": "/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/implicit.cpp"
 }
 ]

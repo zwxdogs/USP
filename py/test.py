@@ -1,9 +1,16 @@
-from probe.single_probe import Single_probe
+# from scan import Linear_scan
 
-s_p = Single_probe(5e6, 0.6, [0, 0, 0], 0.01, 0.015)
+# sca = Linear_scan(-1, 1, 5, -2, 2, 5, -3, 3, 5)
+# print(sca.get_scan_xyz())
 
-line = s_p.get_line()
+import numpy as np
 
-print("Line equations:")
-for i, l in enumerate(line):
-    print(f"Line {i+1}: {l[0]}*x + {l[1]}*y + {l[2]} = 0")
+# import test_np
+
+from ..build.test_np import test_np
+
+a = np.array([[1, 2, 3], [4, 5, 6]])
+
+b = test_np.value_double(a)
+
+print(b)

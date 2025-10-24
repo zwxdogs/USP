@@ -41,37 +41,140 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = /home/zwxdogs/work/USP/build/
 # =============================================================================
-# Object build statements for MODULE_LIBRARY target straighjt_flow_2d
+# Object build statements for MODULE_LIBRARY target test_np
 
 
 #############################################
-# Order-only phony target for straighjt_flow_2d
+# Order-only phony target for test_np
 
-build cmake_object_order_depends_target_straighjt_flow_2d: phony || CMakeFiles/straighjt_flow_2d.dir
+build cmake_object_order_depends_target_test_np: phony || cmake_object_order_depends_target_nanobind-static
 
-build CMakeFiles/straighjt_flow_2d.dir/bind.cpp.o: CXX_COMPILER__straighjt_flow_2d_Debug /home/zwxdogs/work/USP/bind.cpp || cmake_object_order_depends_target_straighjt_flow_2d
-  DEFINES = -Dstraighjt_flow_2d_EXPORTS
-  DEP_FILE = CMakeFiles/straighjt_flow_2d.dir/bind.cpp.o.d
+build CMakeFiles/test_np.dir/src/tools/test_np.cpp.o: CXX_COMPILER__test_np_Debug /home/zwxdogs/work/USP/src/tools/test_np.cpp || cmake_object_order_depends_target_test_np
+  DEFINES = -Dtest_np_EXPORTS
+  DEP_FILE = CMakeFiles/test_np.dir/src/tools/test_np.cpp.o.d
   FLAGS = -g -fPIC -fvisibility=hidden
-  INCLUDES = -isystem /home/zwxdogs/software/miniconda3/include/python3.13 -isystem /home/zwxdogs/work/USP/extern/pybind11/include
-  OBJECT_DIR = CMakeFiles/straighjt_flow_2d.dir
-  OBJECT_FILE_DIR = CMakeFiles/straighjt_flow_2d.dir
+  INCLUDES = -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include
+  OBJECT_DIR = CMakeFiles/test_np.dir
+  OBJECT_FILE_DIR = CMakeFiles/test_np.dir/src/tools
 
 
 # =============================================================================
-# Link build statements for MODULE_LIBRARY target straighjt_flow_2d
+# Link build statements for MODULE_LIBRARY target test_np
 
 
 #############################################
-# Link the shared module straighjt_flow_2d.cpython-313-x86_64-linux-gnu.so
+# Link the shared module test_np.cpython-310-x86_64-linux-gnu.so
 
-build straighjt_flow_2d.cpython-313-x86_64-linux-gnu.so: CXX_MODULE_LIBRARY_LINKER__straighjt_flow_2d_Debug CMakeFiles/straighjt_flow_2d.dir/bind.cpp.o
+build test_np.cpython-310-x86_64-linux-gnu.so: CXX_MODULE_LIBRARY_LINKER__test_np_Debug CMakeFiles/test_np.dir/src/tools/test_np.cpp.o | libnanobind-static.a || libnanobind-static.a
   LANGUAGE_COMPILE_FLAGS = -g
-  OBJECT_DIR = CMakeFiles/straighjt_flow_2d.dir
+  LINK_LIBRARIES = libnanobind-static.a
+  OBJECT_DIR = CMakeFiles/test_np.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = straighjt_flow_2d.cpython-313-x86_64-linux-gnu.so
-  TARGET_PDB = straighjt_flow_2d.cpython-313-x86_64-linux-gnu.so.dbg
+  TARGET_FILE = test_np.cpython-310-x86_64-linux-gnu.so
+  TARGET_PDB = test_np.cpython-310-x86_64-linux-gnu.so.dbg
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target nanobind-static
+
+
+#############################################
+# Order-only phony target for nanobind-static
+
+build cmake_object_order_depends_target_nanobind-static: phony || CMakeFiles/nanobind-static.dir
+
+build CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_internals.cpp.o: CXX_COMPILER__nanobind-static_Debug /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_internals.cpp || cmake_object_order_depends_target_nanobind-static
+  DEP_FILE = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_internals.cpp.o.d
+  FLAGS = -g -fPIC -fvisibility=hidden -fno-strict-aliasing
+  INCLUDES = -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include
+  OBJECT_DIR = CMakeFiles/nanobind-static.dir
+  OBJECT_FILE_DIR = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src
+
+build CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_func.cpp.o: CXX_COMPILER__nanobind-static_Debug /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_func.cpp || cmake_object_order_depends_target_nanobind-static
+  DEP_FILE = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_func.cpp.o.d
+  FLAGS = -g -fPIC -fvisibility=hidden -fno-strict-aliasing
+  INCLUDES = -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include
+  OBJECT_DIR = CMakeFiles/nanobind-static.dir
+  OBJECT_FILE_DIR = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src
+
+build CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_type.cpp.o: CXX_COMPILER__nanobind-static_Debug /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_type.cpp || cmake_object_order_depends_target_nanobind-static
+  DEP_FILE = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_type.cpp.o.d
+  FLAGS = -g -fPIC -fvisibility=hidden -fno-strict-aliasing
+  INCLUDES = -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include
+  OBJECT_DIR = CMakeFiles/nanobind-static.dir
+  OBJECT_FILE_DIR = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src
+
+build CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_enum.cpp.o: CXX_COMPILER__nanobind-static_Debug /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_enum.cpp || cmake_object_order_depends_target_nanobind-static
+  DEP_FILE = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_enum.cpp.o.d
+  FLAGS = -g -fPIC -fvisibility=hidden -fno-strict-aliasing
+  INCLUDES = -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include
+  OBJECT_DIR = CMakeFiles/nanobind-static.dir
+  OBJECT_FILE_DIR = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src
+
+build CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_ndarray.cpp.o: CXX_COMPILER__nanobind-static_Debug /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_ndarray.cpp || cmake_object_order_depends_target_nanobind-static
+  DEP_FILE = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_ndarray.cpp.o.d
+  FLAGS = -g -fPIC -fvisibility=hidden -fno-strict-aliasing
+  INCLUDES = -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include
+  OBJECT_DIR = CMakeFiles/nanobind-static.dir
+  OBJECT_FILE_DIR = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src
+
+build CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_static_property.cpp.o: CXX_COMPILER__nanobind-static_Debug /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_static_property.cpp || cmake_object_order_depends_target_nanobind-static
+  DEP_FILE = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_static_property.cpp.o.d
+  FLAGS = -g -fPIC -fvisibility=hidden -fno-strict-aliasing
+  INCLUDES = -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include
+  OBJECT_DIR = CMakeFiles/nanobind-static.dir
+  OBJECT_FILE_DIR = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src
+
+build CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_ft.cpp.o: CXX_COMPILER__nanobind-static_Debug /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/nb_ft.cpp || cmake_object_order_depends_target_nanobind-static
+  DEP_FILE = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_ft.cpp.o.d
+  FLAGS = -g -fPIC -fvisibility=hidden -fno-strict-aliasing
+  INCLUDES = -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include
+  OBJECT_DIR = CMakeFiles/nanobind-static.dir
+  OBJECT_FILE_DIR = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src
+
+build CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/common.cpp.o: CXX_COMPILER__nanobind-static_Debug /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/common.cpp || cmake_object_order_depends_target_nanobind-static
+  DEP_FILE = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/common.cpp.o.d
+  FLAGS = -g -fPIC -fvisibility=hidden -fno-strict-aliasing
+  INCLUDES = -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include
+  OBJECT_DIR = CMakeFiles/nanobind-static.dir
+  OBJECT_FILE_DIR = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src
+
+build CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/error.cpp.o: CXX_COMPILER__nanobind-static_Debug /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/error.cpp || cmake_object_order_depends_target_nanobind-static
+  DEP_FILE = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/error.cpp.o.d
+  FLAGS = -g -fPIC -fvisibility=hidden -fno-strict-aliasing
+  INCLUDES = -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include
+  OBJECT_DIR = CMakeFiles/nanobind-static.dir
+  OBJECT_FILE_DIR = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src
+
+build CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/trampoline.cpp.o: CXX_COMPILER__nanobind-static_Debug /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/trampoline.cpp || cmake_object_order_depends_target_nanobind-static
+  DEP_FILE = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/trampoline.cpp.o.d
+  FLAGS = -g -fPIC -fvisibility=hidden -fno-strict-aliasing
+  INCLUDES = -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include
+  OBJECT_DIR = CMakeFiles/nanobind-static.dir
+  OBJECT_FILE_DIR = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src
+
+build CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/implicit.cpp.o: CXX_COMPILER__nanobind-static_Debug /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/implicit.cpp || cmake_object_order_depends_target_nanobind-static
+  DEP_FILE = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/implicit.cpp.o.d
+  FLAGS = -g -fPIC -fvisibility=hidden -fno-strict-aliasing
+  INCLUDES = -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include
+  OBJECT_DIR = CMakeFiles/nanobind-static.dir
+  OBJECT_FILE_DIR = CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target nanobind-static
+
+
+#############################################
+# Link the static library libnanobind-static.a
+
+build libnanobind-static.a: CXX_STATIC_LIBRARY_LINKER__nanobind-static_Debug CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_internals.cpp.o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_func.cpp.o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_type.cpp.o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_enum.cpp.o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_ndarray.cpp.o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_static_property.cpp.o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/nb_ft.cpp.o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/common.cpp.o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/error.cpp.o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/trampoline.cpp.o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/implicit.cpp.o
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = CMakeFiles/nanobind-static.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = libnanobind-static.a
+  TARGET_PDB = nanobind-static.a.dbg
 
 
 #############################################
@@ -98,38 +201,11 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 # =============================================================================
-# Write statements declared in CMakeLists.txt:
-# /home/zwxdogs/work/USP/CMakeLists.txt
-# =============================================================================
-
-
-#############################################
-# Utility command for edit_cache
-
-build extern/pybind11/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/zwxdogs/work/USP/build/extern/pybind11 && /usr/bin/ccmake -S/home/zwxdogs/work/USP -B/home/zwxdogs/work/USP/build
-  DESC = Running CMake cache editor...
-  pool = console
-  restat = 1
-
-build extern/pybind11/edit_cache: phony extern/pybind11/CMakeFiles/edit_cache.util
-
-
-#############################################
-# Utility command for rebuild_cache
-
-build extern/pybind11/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/zwxdogs/work/USP/build/extern/pybind11 && /usr/bin/cmake --regenerate-during-build -S/home/zwxdogs/work/USP -B/home/zwxdogs/work/USP/build
-  DESC = Running CMake to regenerate build system...
-  pool = console
-  restat = 1
-
-build extern/pybind11/rebuild_cache: phony extern/pybind11/CMakeFiles/rebuild_cache.util
-
-# =============================================================================
 # Target aliases.
 
-build straighjt_flow_2d: phony straighjt_flow_2d.cpython-313-x86_64-linux-gnu.so
+build nanobind-static: phony libnanobind-static.a
+
+build test_np: phony test_np.cpython-310-x86_64-linux-gnu.so
 
 # =============================================================================
 # Folder targets.
@@ -139,14 +215,7 @@ build straighjt_flow_2d: phony straighjt_flow_2d.cpython-313-x86_64-linux-gnu.so
 #############################################
 # Folder: /home/zwxdogs/work/USP/build
 
-build all: phony straighjt_flow_2d.cpython-313-x86_64-linux-gnu.so extern/pybind11/all
-
-# =============================================================================
-
-#############################################
-# Folder: /home/zwxdogs/work/USP/build/extern/pybind11
-
-build extern/pybind11/all: phony
+build all: phony test_np.cpython-310-x86_64-linux-gnu.so
 
 # =============================================================================
 # Built-in targets
@@ -155,14 +224,14 @@ build extern/pybind11/all: phony
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../extern/pybind11/CMakeLists.txt ../extern/pybind11/tools/JoinPaths.cmake ../extern/pybind11/tools/pybind11Common.cmake ../extern/pybind11/tools/pybind11NewTools.cmake /usr/local/share/eigen3/cmake/Eigen3Config.cmake /usr/local/share/eigen3/cmake/Eigen3ConfigVersion.cmake /usr/local/share/eigen3/cmake/Eigen3Targets.cmake /usr/share/cmake-3.22/Modules/CMakeCInformation.cmake /usr/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.22/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake /usr/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.22/Modules/CMakeDependentOption.cmake /usr/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.22/Modules/CMakePackageConfigHelpers.cmake /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.22/Modules/CheckCXXCompilerFlag.cmake /usr/share/cmake-3.22/Modules/CheckCXXSourceCompiles.cmake /usr/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU.cmake /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake-3.22/Modules/FindPackageMessage.cmake /usr/share/cmake-3.22/Modules/FindPython.cmake /usr/share/cmake-3.22/Modules/FindPython/Support.cmake /usr/share/cmake-3.22/Modules/GNUInstallDirs.cmake /usr/share/cmake-3.22/Modules/Internal/CheckCompilerFlag.cmake /usr/share/cmake-3.22/Modules/Internal/CheckSourceCompiles.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.22/Modules/Platform/Linux.cmake /usr/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /usr/share/cmake-3.22/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/3.22.1/CMakeCCompiler.cmake CMakeFiles/3.22.1/CMakeCXXCompiler.cmake CMakeFiles/3.22.1/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../.venv/lib/python3.10/site-packages/nanobind/cmake/nanobind-config-version.cmake ../.venv/lib/python3.10/site-packages/nanobind/cmake/nanobind-config.cmake ../CMakeLists.txt /usr/local/share/eigen3/cmake/Eigen3Config.cmake /usr/local/share/eigen3/cmake/Eigen3ConfigVersion.cmake /usr/local/share/eigen3/cmake/Eigen3Targets.cmake /usr/share/cmake-3.22/Modules/CMakeCInformation.cmake /usr/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU.cmake /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake-3.22/Modules/FindPackageMessage.cmake /usr/share/cmake-3.22/Modules/FindPython.cmake /usr/share/cmake-3.22/Modules/FindPython/Support.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.22/Modules/Platform/Linux.cmake /usr/share/cmake-3.22/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.22.1/CMakeCCompiler.cmake CMakeFiles/3.22.1/CMakeCXXCompiler.cmake CMakeFiles/3.22.1/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt ../extern/pybind11/CMakeLists.txt ../extern/pybind11/tools/JoinPaths.cmake ../extern/pybind11/tools/pybind11Common.cmake ../extern/pybind11/tools/pybind11NewTools.cmake /usr/local/share/eigen3/cmake/Eigen3Config.cmake /usr/local/share/eigen3/cmake/Eigen3ConfigVersion.cmake /usr/local/share/eigen3/cmake/Eigen3Targets.cmake /usr/share/cmake-3.22/Modules/CMakeCInformation.cmake /usr/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.22/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake /usr/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.22/Modules/CMakeDependentOption.cmake /usr/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.22/Modules/CMakePackageConfigHelpers.cmake /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.22/Modules/CheckCXXCompilerFlag.cmake /usr/share/cmake-3.22/Modules/CheckCXXSourceCompiles.cmake /usr/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU.cmake /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake-3.22/Modules/FindPackageMessage.cmake /usr/share/cmake-3.22/Modules/FindPython.cmake /usr/share/cmake-3.22/Modules/FindPython/Support.cmake /usr/share/cmake-3.22/Modules/GNUInstallDirs.cmake /usr/share/cmake-3.22/Modules/Internal/CheckCompilerFlag.cmake /usr/share/cmake-3.22/Modules/Internal/CheckSourceCompiles.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.22/Modules/Platform/Linux.cmake /usr/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /usr/share/cmake-3.22/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/3.22.1/CMakeCCompiler.cmake CMakeFiles/3.22.1/CMakeCXXCompiler.cmake CMakeFiles/3.22.1/CMakeSystem.cmake: phony
+build ../.venv/lib/python3.10/site-packages/nanobind/cmake/nanobind-config-version.cmake ../.venv/lib/python3.10/site-packages/nanobind/cmake/nanobind-config.cmake ../CMakeLists.txt /usr/local/share/eigen3/cmake/Eigen3Config.cmake /usr/local/share/eigen3/cmake/Eigen3ConfigVersion.cmake /usr/local/share/eigen3/cmake/Eigen3Targets.cmake /usr/share/cmake-3.22/Modules/CMakeCInformation.cmake /usr/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /usr/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Compiler/GNU.cmake /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake-3.22/Modules/FindPackageMessage.cmake /usr/share/cmake-3.22/Modules/FindPython.cmake /usr/share/cmake-3.22/Modules/FindPython/Support.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.22/Modules/Platform/Linux.cmake /usr/share/cmake-3.22/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.22.1/CMakeCCompiler.cmake CMakeFiles/3.22.1/CMakeCXXCompiler.cmake CMakeFiles/3.22.1/CMakeSystem.cmake: phony
 
 
 #############################################
