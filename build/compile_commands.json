@@ -1,8 +1,8 @@
 [
 {
   "directory": "/home/zwxdogs/work/USP/build",
-  "command": "/usr/bin/g++ -Dtest_np_EXPORTS -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -o CMakeFiles/test_np.dir/src/tools/test_np.cpp.o -c /home/zwxdogs/work/USP/src/tools/test_np.cpp",
-  "file": "/home/zwxdogs/work/USP/src/tools/test_np.cpp"
+  "command": "/usr/bin/g++ -Dlinear_mesh_EXPORTS -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -o CMakeFiles/linear_mesh.dir/src/tools/linear_mesh.cpp.o -c /home/zwxdogs/work/USP/src/tools/linear_mesh.cpp",
+  "file": "/home/zwxdogs/work/USP/src/tools/linear_mesh.cpp"
 },
 {
   "directory": "/home/zwxdogs/work/USP/build",

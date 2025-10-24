@@ -81,7 +81,13 @@
         "straight_flow_2d.C": "cpp",
         "scatter.C": "cpp",
         "point_cloud copy.C": "cpp",
-        "*.clang-format": "cpp"
+        "*.clang-format": "cpp",
+        "any": "cpp",
+        "barrier": "cpp",
+        "codecvt": "cpp",
+        "regex": "cpp",
+        "future": "cpp",
+        "valarray": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled",
     "python.analysis.autoImportCompletions": true,

@@ -1,32 +1,48 @@
-// Calculate linear mesh (x, y, z) by three one-dimensional arrays.
-#include <pybind11/pybind11.h>
-#include <pybind11/numpy.h>
-#include <eigen3/Eigen/Dense>
+// Calculate linear mesh grid.
 
-namespace py = pybind11;
-using matXd = Eigen::MatrixXd;
+#include <nanobind/nanobind.h>  // nanobind模块
+#include <nanobind/ndarray.h>   // 数组模块
 
-py::array_t<double>
-value_double(py::array_t<double>& arr1)
+namespace nb = nanobind;
+
+// using arr_3c = nb::ndarray<double, nb::numpy, nb::c_contig, nb::shape<-1, 3>>;
+
+nb::ndarray<double, nb::numpy, nb::c_contig>
+create_mesh(double min_x, double max_x, int N_x, double min_y, double max_y, int N_y, double min_z, double max_z, int N_z)
 {
-    auto r1 = arr1.unchecked<2>();
+    double dx = (max_x - min_x) / (N_x - 1);
+    double dy = (max_y - min_y) / (N_y - 1);
+    double dz = (max_z - min_z) / (N_z - 1);
 
-    py::array_t<double> out = py::array_t<double>(arr1.size());
-    out.resize({arr1.shape()[0], arr1.shape()[1]});
-    auto r_out = out.mutable_unchecked<2>();
+    double* data = new double[N_x * N_y * N_z * 3];
 
-    for ( int i = 0; i < arr1.shape()[0]; i++ ) {
-        for ( int j = 0; j < arr1.shape()[1]; j++ ) {
-            r_out(i, j) = r1(i, j) * 2.0;
+    size_t index = 0;
+    for ( int i = 0; i < N_x; ++i ) {
+        double x_now = min_x + i * dx;
+        for ( int j = 0; j < N_y; ++j ) {
+            double y_now = min_y + j * dy;
+            for ( int k = 0; k < N_z; ++k ) {
+                data[index++] = x_now;
+                data[index++] = y_now;
+                data[index++] = min_z + k * dz;
+            }
         }
     }
 
-    return out;
+    nb::capsule owner(data,
+                      [](void* p) noexcept {  // 析构函数
+                          delete[] (double*)p;
+                      });
+
+    std::initializer_list<size_t> shape = {(size_t)(N_x * N_y * N_z), 3};
+
+    return nb::ndarray<double, nb::numpy, nb::c_contig>(
+      data, shape, owner);
 }
 
-PYBIND11_MODULE(test_np, m)
+NB_MODULE(linear_mesh, m)
 {
-    m.doc() = "Numpy array value double function module";
+    m.doc() = "Calculate linear mesh grid.";
 
-    m.def("value_double", &value_double, "A function that doubles the input array values");
+    m.def("create_mesh", &create_mesh, "Calculate linear mesh grid.", nb::rv_policy::take_ownership);  // 绑定函数
 }

@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "test_np.cpython-310-x86_64-linux-gnu.so"
+			"path" : "linear_mesh.cpython-310-x86_64-linux-gnu.so"
 		}
 	],
 	"backtrace" : 2,
@@ -56,7 +56,7 @@
 			"defines" : 
 			[
 				{
-					"define" : "test_np_EXPORTS"
+					"define" : "linear_mesh_EXPORTS"
 				}
 			],
 			"includes" : 
@@ -84,7 +84,7 @@
 			"id" : "nanobind-static::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "test_np::@6890427a1f51a3e7e1df",
+	"id" : "linear_mesh::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -101,8 +101,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "test_np",
-	"nameOnDisk" : "test_np.cpython-310-x86_64-linux-gnu.so",
+	"name" : "linear_mesh",
+	"nameOnDisk" : "linear_mesh.cpython-310-x86_64-linux-gnu.so",
 	"paths" : 
 	{
 		"build" : ".",
@@ -123,7 +123,7 @@
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
-			"path" : "src/tools/test_np.cpp",
+			"path" : "src/tools/linear_mesh.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

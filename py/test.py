@@ -3,14 +3,8 @@
 # sca = Linear_scan(-1, 1, 5, -2, 2, 5, -3, 3, 5)
 # print(sca.get_scan_xyz())
 
-import numpy as np
+import numpy as n
+import linear_mesh
 
-# import test_np
-
-from ..build.test_np import test_np
-
-a = np.array([[1, 2, 3], [4, 5, 6]])
-
-b = test_np.value_double(a)
-
-print(b)
+test_array = linear_mesh.create_mesh(-1, 1, 5, -2, 2, 5, -3, 3, 5)
+print(test_array)
