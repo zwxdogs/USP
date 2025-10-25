@@ -4,15 +4,26 @@
 #include <nanobind/ndarray.h>   // 数组模块
 
 namespace nb = nanobind;
+using arr_np_c = nb::ndarray<double, nb::numpy, nb::c_contig>;
 
-// using arr_3c = nb::ndarray<double, nb::numpy, nb::c_contig, nb::shape<-1, 3>>;
-
-nb::ndarray<double, nb::numpy, nb::c_contig>
+arr_np_c
 create_mesh(double min_x, double max_x, int N_x, double min_y, double max_y, int N_y, double min_z, double max_z, int N_z)
 {
-    double dx = (max_x - min_x) / (N_x - 1);
-    double dy = (max_y - min_y) / (N_y - 1);
-    double dz = (max_z - min_z) / (N_z - 1);
+    if ( N_x <= 0 || N_y <= 0 || N_z <= 0 ) {
+        throw std::runtime_error("Number of points in each direction must be positive.");
+    }
+    double dx = 0;
+    double dy = 0;
+    double dz = 0;
+    if ( N_x != 1 ) {
+        dx = (max_x - min_x) / (N_x - 1);  // One point handling.
+    }
+    if ( N_y != 1 ) {
+        dy = (max_y - min_y) / (N_y - 1);
+    }
+    if ( N_z != 1 ) {
+        dz = (max_z - min_z) / (N_z - 1);
+    }
 
     double* data = new double[N_x * N_y * N_z * 3];
 
@@ -36,7 +47,7 @@ create_mesh(double min_x, double max_x, int N_x, double min_y, double max_y, int
 
     std::initializer_list<size_t> shape = {(size_t)(N_x * N_y * N_z), 3};
 
-    return nb::ndarray<double, nb::numpy, nb::c_contig>(
+    return arr_np_c(
       data, shape, owner);
 }
 

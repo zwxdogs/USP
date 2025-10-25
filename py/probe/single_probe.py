@@ -5,10 +5,11 @@ import numpy as np
 
 class Single_probe(Probe):
     def __init__(self, fc, bandwidth, focus, width, height):
-        super(Single_probe, self).__init__(fc, bandwidth, focus)
+        super(Single_probe, self).__init__(fc, bandwidth, focus, [0, 0, 0])
         self.__symbol = self.symbol_list[0]  # "single"
         self.__width = width  # x direction
         self.__height = height  # y direction
+        self.__N_el = 1
         # Polygon aperture
         self.__line = np.zeros((4, 3))
         self.__line = np.array(
@@ -40,3 +41,6 @@ class Single_probe(Probe):
 
     def get_corners(self):
         return self.__corners
+
+    def get_N_el(self):
+        return self.__N_el

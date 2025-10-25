@@ -58,5 +58,10 @@
   "directory": "/home/zwxdogs/work/USP/build",
   "command": "/usr/bin/g++ -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/ext/robin_map/include -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -fno-strict-aliasing -o CMakeFiles/nanobind-static.dir/.venv/lib/python3.10/site-packages/nanobind/src/implicit.cpp.o -c /home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/implicit.cpp",
   "file": "/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/src/implicit.cpp"
+},
+{
+  "directory": "/home/zwxdogs/work/USP/build",
+  "command": "/usr/bin/g++ -DSIR_calc_EXPORTS -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -o CMakeFiles/SIR_calc.dir/src/SIR/SIR_calc.cpp.o -c /home/zwxdogs/work/USP/src/SIR/SIR_calc.cpp",
+  "file": "/home/zwxdogs/work/USP/src/SIR/SIR_calc.cpp"
 }
 ]

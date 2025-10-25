@@ -5,12 +5,13 @@ from abc import abstractmethod
 
 
 class Probe(object):
-    def __init__(self, fc, bandwidth, focus, center=np.array([0, 0, 0])):
+    def __init__(self, fc, bandwidth, focus, position, center=np.array([0, 0, 0])):
         self._fc = fc
         self._bandwidth = bandwidth
         self._focus = focus  # array (x, y, z)
         self._center = center  # array (x, y, z), default at origin
         self.symbol_list = ["single", "linear"]
+        self._position = position  # array (x, y, z)
 
     def get_fc(self):
         return self._fc
@@ -26,6 +27,9 @@ class Probe(object):
 
     def get_symbol_list(self):
         return self.symbol_list
+
+    def get_position(self):
+        return self._position
 
     @abstractmethod
     def get_symbol(self):
