@@ -63,5 +63,10 @@
   "directory": "/home/zwxdogs/work/USP/build",
   "command": "/usr/bin/g++ -DSIR_calc_EXPORTS -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -o CMakeFiles/SIR_calc.dir/src/SIR/SIR_calc.cpp.o -c /home/zwxdogs/work/USP/src/SIR/SIR_calc.cpp",
   "file": "/home/zwxdogs/work/USP/src/SIR/SIR_calc.cpp"
+},
+{
+  "directory": "/home/zwxdogs/work/USP/build",
+  "command": "/usr/bin/g++ -Dtest_EXPORTS -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include -g -fPIC -fvisibility=hidden -o CMakeFiles/test.dir/src/test.cpp.o -c /home/zwxdogs/work/USP/src/test.cpp",
+  "file": "/home/zwxdogs/work/USP/src/test.cpp"
 }
 ]

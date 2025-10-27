@@ -11,6 +11,7 @@ AlignConsecutiveAssignments: None
 AlignConsecutiveMacros: AcrossComments
 BreakBeforeBinaryOperators: All
 AlignOperands: Align
+
 AlignTrailingComments: Always
 AllowAllArgumentsOnNextLine: true
 AllowAllParametersOfDeclarationOnNextLine: true
@@ -18,7 +19,6 @@ AllowShortBlocksOnASingleLine: Always
 AllowShortEnumsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: Inline
 AllowShortIfStatementsOnASingleLine: false
-# AllowShortLambdaInShortFunctions: Empty
 AllowShortLoopsOnASingleLine: true
 AlwaysBreakAfterDefinitionReturnType: TopLevel
 AlwaysBreakBeforeMultilineStrings: true
@@ -35,7 +35,6 @@ CompactNamespaces: false
 ConstructorInitializerIndentWidth: 4
 ContinuationIndentWidth: 2
 Cpp11BracedListStyle: true
-# EmptyLineAfterAccessModifie: true
 EmptyLineBeforeAccessModifier: Always
 FixNamespaceComments: true
 IncludeBlocks: Preserve
@@ -59,7 +58,6 @@ SpaceBeforeAssignmentOperators: true
 SpaceBeforeCpp11BracedList: true
 SpaceBeforeParens: ControlStatements
 SpaceInEmptyBlock: true
-# SpeaceBeforeTrailingComments: true
 SpacesInAngles: false
 SpacesInCStyleCastParentheses: false
 SpacesInConditionalStatement: true

@@ -7,3 +7,5 @@
 ## 记录
 - 散射体坐标采用Numpy矩阵保存。
 - 使用空间脉冲响应方法。
+- SIR计算结果使用`std::vector<std::vector<double>>`保存。
+ - 返回到Python为List嵌套。

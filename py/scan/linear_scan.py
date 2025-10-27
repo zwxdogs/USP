@@ -1,7 +1,5 @@
 # Linear scan region.
-import scan
 from scan.scan_base import Scan_base
-import numpy as np
 import scan.tools.linear_mesh as linear_mesh
 
 

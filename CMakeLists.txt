@@ -25,3 +25,5 @@ file(GLOB SRC_FILES
 nanobind_add_module(linear_mesh src/tools/linear_mesh.cpp)
 nanobind_add_module(SIR_calc src/SIR/SIR_calc.cpp)
 
+nanobind_add_module(test src/test.cpp)
+

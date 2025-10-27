@@ -1,7 +1,7 @@
 // Calculate linear mesh grid.
 
-#include <nanobind/nanobind.h>  // nanobind模块
-#include <nanobind/ndarray.h>   // 数组模块
+#include <nanobind/nanobind.h>
+#include <nanobind/ndarray.h>
 
 namespace nb = nanobind;
 using arr_np_c = nb::ndarray<double, nb::numpy, nb::c_contig>;
@@ -26,7 +26,7 @@ create_mesh(double min_x, double max_x, int N_x, double min_y, double max_y, int
     }
 
     double* data = new double[N_x * N_y * N_z * 3];
-
+    // create mesh grid
     size_t index = 0;
     for ( int i = 0; i < N_x; ++i ) {
         double x_now = min_x + i * dx;

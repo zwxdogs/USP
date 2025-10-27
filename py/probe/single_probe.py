@@ -21,10 +21,10 @@ class Single_probe(Probe):
             ]
         )
         self.__corners = [
-            [width / 2, height / 2],  # line1 & line2 intersection
-            [width / 2, -height / 2],  # line2 & line3 intersection
-            [-width / 2, -height / 2],  # line3 & line4 intersection
-            [-width / 2, height / 2],  # line4 & line1 intersection
+            [width / 2, height / 2, 0],  # line1 & line2 intersection
+            [width / 2, -height / 2, 0],  # line2 & line3 intersection
+            [-width / 2, -height / 2, 0],  # line3 & line4 intersection
+            [-width / 2, height / 2, 0],  # line4 & line1 intersection
         ]
 
     def get_symbol(self):

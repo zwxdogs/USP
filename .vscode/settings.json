@@ -3,6 +3,7 @@
     "editor.defaultFormatter": "xaver.clang-format",
     "files.associations": {
         "options": "makefile",
+        ".clang-format": "xml",
         "mk_line_pha.C": "cpp",
         "test.C": "cpp",
         "dense": "cpp",
@@ -87,7 +88,8 @@
         "codecvt": "cpp",
         "regex": "cpp",
         "future": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "*.inc": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled",
     "python.analysis.autoImportCompletions": true,
