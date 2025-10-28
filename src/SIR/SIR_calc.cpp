@@ -25,6 +25,58 @@ convert_angle(double angle, double y)
     return convert_angle;
 }
 
+vec_i
+inside_demarcate(arr_np_c_in probe_line, arr_np_c_in probe_corners)
+{
+    // injudge which direction about the lines is inside the polygon.
+
+    // calculate centroid of the polygon.
+    double centroid_x = 0.0;
+    double centroid_y = 0.0;
+    for ( int i = 0; i < probe_corners.shape(0); ++i ) {
+        centroid_x += probe_corners(i, 0);
+        centroid_y += probe_corners(i, 1);
+    }
+    centroid_x /= probe_corners.shape(0);
+    centroid_y /= probe_corners.shape(0);
+
+    vec_i inside_direction;
+    // injudge and store.
+    for ( int i = 0; i < probe_line.shape(0); ++i ) {
+        double line_a = probe_line(i, 0);
+        double line_b = probe_line(i, 1);
+        double line_c = probe_line(i, 2);
+
+        double injudge_value = line_a * centroid_x + line_b * centroid_y + line_c;
+        if ( injudge_value > 0 ) {
+            inside_direction.emplace_back(1);
+        } else {
+            inside_direction.emplace_back(-1);
+        }
+    }
+    return inside_direction;
+}
+
+bool
+point_inside_polygon(vec_i inside_direction,
+                     arr_np_c_in probe_line,
+                     double x_point,
+                     double y_point)
+{
+    // injudge whether the point is inside the polygon.
+    for ( int i = 0; i < probe_line.shape(0); ++i ) {
+        double line_a = probe_line(i, 0);
+        double line_b = probe_line(i, 1);
+        double line_c = probe_line(i, 2);
+
+        double injudge_value = line_a * x_point + line_b * y_point + line_c;
+        if ( injudge_value * inside_direction[i] <= 0 ) {
+            return false;
+        }
+    }
+    return true;
+}
+
 vec_vec_d
 calc_polygon(arr_np_c_in probe_line,
              arr_np_c_in probe_corners,
@@ -32,6 +84,9 @@ calc_polygon(arr_np_c_in probe_line,
              double dt,
              double c0)
 {
+    // injudge which direction about the lines is inside the polygon.
+    vec_i inside_direction = inside_demarcate(probe_line, probe_corners);
+
     vec_vec_d SIR_result;
     // loop all of the scan positions
     for ( int i = 0; i < scan_position.shape(0); ++i ) {
@@ -94,7 +149,7 @@ calc_polygon(arr_np_c_in probe_line,
         for ( int j = dc_step.front(); j <= max_step; ++j ) {
             double pow_r = std::pow(c0 * (j * dt), 2) - std::pow(z_p, 2);
             // loop lines for calculate intersection points and angles.
-            vec_d angles;
+            vec_d angles;  // Angles relative to x axis (origin is scan point).
             for ( int k = 0; k < probe_line.shape(0); ++k ) {
                 if ( probe_line(k, 1) == 0 ) {
                     // k = inf
@@ -138,16 +193,25 @@ calc_polygon(arr_np_c_in probe_line,
             angles.erase(std::unique(angles.begin(), angles.end()), angles.end());
 
             // find which point in the aperture and calculate sum of the angle difference.
+            double angle_difference = 0;
             for ( int k = 1; k < angles.size(); ++k ) {
                 // loop angles.
                 double angle_now = angles[k - 1];
                 double angle_next = angles[k];
                 double angle_mid = (angle_now + angle_next) / 2;
+
+                double point_x_mid = x_p + std::cos(angle_mid) * std::sqrt(pow_r);
+                double point_y_mid = y_p + std::sin(angle_mid) * std::sqrt(pow_r);
+
+                if ( point_inside_polygon(inside_direction, probe_line, point_x_mid, point_y_mid) ) {
+                    angle_difference += (angle_next - angle_now);
+                }
             }
             // write data in this step.
+            SIR_data[j - 1] = angle_difference * c0 / (2 * M_PI);
         }
-
         // write data in this scan position.
+        SIR_result.emplace_back(SIR_data);
     }
     return SIR_result;
 }

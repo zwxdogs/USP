@@ -20,12 +20,14 @@ class Single_probe(Probe):
                 [1, 0, width / 2],  # line_4: x = -width/2
             ]
         )
-        self.__corners = [
-            [width / 2, height / 2, 0],  # line1 & line2 intersection
-            [width / 2, -height / 2, 0],  # line2 & line3 intersection
-            [-width / 2, -height / 2, 0],  # line3 & line4 intersection
-            [-width / 2, height / 2, 0],  # line4 & line1 intersection
-        ]
+        self.__corners = np.array(
+            [
+                [width / 2, height / 2, 0],  # line1 & line2 intersection
+                [width / 2, -height / 2, 0],  # line2 & line3 intersection
+                [-width / 2, -height / 2, 0],  # line3 & line4 intersection
+                [-width / 2, height / 2, 0],  # line4 & line1 intersection
+            ]
+        )
 
     def get_symbol(self):
         return self.__symbol
