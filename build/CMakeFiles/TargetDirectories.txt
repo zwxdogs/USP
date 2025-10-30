@@ -1,6 +1,5 @@
 /home/zwxdogs/work/USP/build/CMakeFiles/linear_mesh.dir
 /home/zwxdogs/work/USP/build/CMakeFiles/nanobind-static.dir
 /home/zwxdogs/work/USP/build/CMakeFiles/SIR_calc.dir
-/home/zwxdogs/work/USP/build/CMakeFiles/test.dir
 /home/zwxdogs/work/USP/build/CMakeFiles/edit_cache.dir
 /home/zwxdogs/work/USP/build/CMakeFiles/rebuild_cache.dir
