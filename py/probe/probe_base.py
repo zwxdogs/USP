@@ -10,7 +10,7 @@ class Probe(object):
         self._bandwidth = bandwidth
         self._focus = focus  # array (x, y, z)
         self._center = center  # array (x, y, z), default at origin
-        self.symbol_list = ["single", "linear"]
+        self.symbol_list = ["rect", "linear"]
         self._position = position  # array (x, y, z)
 
     def get_fc(self):

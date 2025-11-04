@@ -47,8 +47,7 @@ create_mesh(double min_x, double max_x, int N_x, double min_y, double max_y, int
 
     std::initializer_list<size_t> shape = {(size_t)(N_x * N_y * N_z), 3};
 
-    return arr_np_c(
-      data, shape, owner);
+    return arr_np_c(data, shape, owner);
 }
 
 NB_MODULE(linear_mesh, m)

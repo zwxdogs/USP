@@ -21,7 +21,7 @@ convert_angle(double angle, double y)
 {
     // convert angle to [0, 2pi]
     double convert_angle = angle;
-    if ( y < 0 ) {
+    if ( angle < 0 ) {
         convert_angle = 2 * M_PI + angle;
     }
     return convert_angle;
@@ -155,6 +155,7 @@ find_discontinuities(const arr_np_c_in& calc_line,
 
             tmp_t = length / c0;
             dc_step[calc_corners.shape(0) + i] = static_cast<int>(std::ceil(tmp_t / dt));
+
         } else {
             double line_k = -calc_line(i, 0) / calc_line(i, 1);
             double line_b = -calc_line(i, 2) / calc_line(i, 1);
@@ -216,8 +217,30 @@ circle_line_intersection(double x_p, double y_p, const arr_np_c_in& calc_line, i
     return result;
 }
 
+double
+calc_angle_difference(double angle_now,
+                      double angle_next,
+                      double x_p,
+                      double y_p,
+                      double pow_r,
+                      const vec_i& inside_direction,
+                      const arr_np_c_in& boundary_line)
+{
+    // calculate angle difference between two angles.
+    double angle_mid = (angle_now + angle_next) / 2;
+    double point_x_mid = x_p + std::cos(angle_mid) * std::sqrt(pow_r);
+    double point_y_mid = y_p + std::sin(angle_mid) * std::sqrt(pow_r);
+    double tmp_angle_difference = 0;
+
+    if ( point_inside_polygon(inside_direction, boundary_line, point_x_mid, point_y_mid) ) {
+        tmp_angle_difference = (angle_next - angle_now);
+    }
+
+    return tmp_angle_difference;
+}
+
 vec_vec_d
-calc_polygon(arr_np_c_in boundary_line,
+calc_polygon(arr_np_c_in boundary_line,  // line for Ax + By + C = 0, store by A、B、C.
              arr_np_c_in calc_line,
              arr_np_c_in boundary_corners,
              arr_np_c_in calc_corners,
@@ -243,17 +266,20 @@ calc_polygon(arr_np_c_in boundary_line,
 
         // ----------------------------------------------------------------------------------------------------- //
         // calculate SIR.
-        int max_step = dc_step.back() + 1;
+        int max_step = dc_step.back() + 5;
         vec_d SIR_data(max_step, 0.0);
 
-        int step_index = 0;  // index for calculate intersection steps.
-        vec_i active_edges;  // store active edges index.
+        int step_index = 0;      // index for calculate intersection steps.
+        vec_i active_edges;      // store active edges index.
+        vec_vec_i inside_angle;  // store inside angles index.
+        double full_arc_flag;    // flag for full arc case.
 
         for ( int j = dc_step.front(); j <= max_step; ++j ) {
             double pow_r = std::pow(c0 * (j * dt), 2) - std::pow(z_p, 2);
             // loop lines for calculate intersection points and angles.
             vec_d angles;  // Angles (band line) relative to x axis (origin is scan point).
             if ( j == dc_step[step_index] ) {
+                full_arc_flag = 0;
                 // In discontinuities.
                 active_edges = update_active_edges(calc_line, x_p, y_p, z_p, dt, j, c0);
                 // loop active edges only.
@@ -269,60 +295,59 @@ calc_polygon(arr_np_c_in boundary_line,
                 std::sort(angles.begin(), angles.end());
                 angles.erase(std::unique(angles.begin(), angles.end()), angles.end());
 
-                // find which point in the aperture and calculate sum of the angle difference.
+                // calculate sum of the angle difference.
                 double angle_difference = 0;
-                double N_outside = 0;
-                vec_vec_i inside_angle_index;
-                if ( angles.size() == 2 ) {
-                    // special case: only two intersection points.
-                    double angle_now = angles[0];
-                    double angle_next = angles[1];
-                    double angle_mid_1 = angle_now + M_PI / 2;
-                    double point_x_mid_1 = x_p + std::cos(angle_mid_1) * std::sqrt(pow_r);
-                    double point_y_mid_1 = y_p + std::sin(angle_mid_1) * std::sqrt(pow_r);
 
-                    double angle_mid_2 = angle_next + M_PI / 2;
-                    double point_x_mid_2 = x_p + std::cos(angle_mid_2) * std::sqrt(pow_r);
-                    double point_y_mid_2 = y_p + std::sin(angle_mid_2) * std::sqrt(pow_r);
-                    if ( point_inside_polygon(inside_direction, boundary_line, point_x_mid_1, point_y_mid_1) ) {
-                        angle_difference += (angle_next - angle_now);
-                    } else {
-                        N_outside++;
-                    }
-                    if ( point_inside_polygon(inside_direction, boundary_line, point_x_mid_2, point_y_mid_2) ) {
-                        angle_difference += (angle_next - angle_now);
-                    } else {
-                        N_outside++;
-                    }
-
-                } else {
-                    for ( int k = 1; k < angles.size(); ++k ) {
-                        // loop angles.
-                        double angle_now = angles[k - 1];
-                        double angle_next = angles[k];
-                        double angle_mid = (angle_now + angle_next) / 2;
-                        double point_x_mid = x_p + std::cos(angle_mid) * std::sqrt(pow_r);
-                        double point_y_mid = y_p + std::sin(angle_mid) * std::sqrt(pow_r);
-
-                        if ( point_inside_polygon(inside_direction, boundary_line, point_x_mid, point_y_mid) ) {
-                            angle_difference += (angle_next - angle_now);
-                            vec_i temp_inside_angle;
-                            temp_inside_angle.emplace_back(k - 1);
-                            temp_inside_angle.emplace_back(k);
-                            inside_angle_index.emplace_back(temp_inside_angle);
-                        } else {
-                            N_outside++;
-                        }
-                    }
+                for ( int k = 1; k < angles.size(); ++k ) {
+                    // loop angles.
+                    double angle_difference_k = calc_angle_difference(angles[k - 1], angles[k], x_p, y_p, pow_r, inside_direction, boundary_line);
+                    angle_difference += angle_difference_k;
                 }
+                // calcualte last angle.
+                double angle_difference_last = calc_angle_difference(angles.back(), angles.front() + 2 * M_PI, x_p, y_p, pow_r, inside_direction, boundary_line);
+                angle_difference += angle_difference_last;
+
                 // all inside case.
-                if ( N_outside == 0 ) {
-                    angle_difference = 2 * M_PI;
+                if ( angle_difference == 2 * M_PI ) {
+                    full_arc_flag = 1;
                 }
                 // write data in this step.
                 SIR_data[j - 1] = angle_difference / (2 * M_PI) * c0;
                 step_index++;
+
             } else {
+                // Not in discontinuities.
+                for ( auto idx : active_edges ) {
+                    vec_d intersections_angle = circle_line_intersection(x_p, y_p, calc_line, idx, pow_r);
+                    angles.emplace_back(intersections_angle[0]);
+                    if ( intersections_angle[1] == intersections_angle[0] ) {
+                        continue;
+                    }
+                    angles.emplace_back(intersections_angle[1]);
+                }
+                // sort angles.
+                std::sort(angles.begin(), angles.end());
+                angles.erase(std::unique(angles.begin(), angles.end()), angles.end());
+
+                // calculate sum of the angle difference.
+                double angle_difference = 0;
+                int N_outside = 0;
+
+                if ( full_arc_flag == 1 ) {
+                    // full arc case.
+                    angle_difference += 2 * M_PI;
+                } else {
+                    for ( int k = 1; k < angles.size(); ++k ) {
+                        // loop angles.
+                        double angle_difference_k = calc_angle_difference(angles[k - 1], angles[k], x_p, y_p, pow_r, inside_direction, boundary_line);
+                        angle_difference += angle_difference_k;
+                    }
+                    // calcualte last angle.
+                    double angle_difference_last = calc_angle_difference(angles.back(), angles.front() + 2 * M_PI, x_p, y_p, pow_r, inside_direction, boundary_line);
+                    angle_difference += angle_difference_last;
+                }
+                // write data in this step.
+                SIR_data[j - 1] = angle_difference / (2 * M_PI) * c0;
             }
         }
         // write data in this scan position.
