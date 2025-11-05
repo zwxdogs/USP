@@ -18,8 +18,8 @@ using vec_d = std::vector<double>;
 using vec_i = std::vector<int>;
 using vec_vec_d = std::vector<vec_d>;
 using vec_vec_i = std::vector<vec_i>;
-using set_int = std::set<int>;
-using set_double = std::set<double>;
+using set_i = std::set<int>;
+using set_d = std::set<double>;
 
 double
 convert_tan2angle(double angle)
@@ -136,7 +136,7 @@ update_active_edges(const arr_np_c_in& calc_line,
     return active_edges;
 }
 
-set_int
+set_i
 find_discontinuities(const arr_np_c_in& calc_line,
                      const arr_np_c_in& calc_corners,
                      double x_p,
@@ -149,7 +149,7 @@ find_discontinuities(const arr_np_c_in& calc_line,
     auto* corner_data = calc_corners.data();
 
     int N_dc = calc_corners.shape(0) + calc_line.shape(0);
-    set_int dc_step;
+    set_i dc_step;
     // calculate all of the step (t / dt) for discontinuties points
     // for corners
     for ( int i = 0; i < calc_corners.shape(0); ++i ) {
@@ -194,15 +194,14 @@ find_discontinuities(const arr_np_c_in& calc_line,
     return dc_step;
 }
 
-vec_d
-circle_line_intersection(double x_p, double y_p, const arr_np_c_in& calc_line, int idx, double pow_r)
+void
+circle_line_intersection(double x_p, double y_p, const arr_np_c_in& calc_line, int idx, double pow_r, double result[2])
 {
     auto* line_data = calc_line.data();
     double line_A = line_data[idx * 3 + 0];
     double line_B = line_data[idx * 3 + 1];
     double line_C = line_data[idx * 3 + 2];
     // calculate intersection (convert to angle) points between circle and line.
-    vec_d result;
     if ( line_B == 0 ) {
         // k = inf
         double x_is = -line_C / line_A;
@@ -217,8 +216,8 @@ circle_line_intersection(double x_p, double y_p, const arr_np_c_in& calc_line, i
         double angle_1 = convert_tan2angle(std::atan2(y_is_1 - y_p, x_is - x_p));
         double angle_2 = convert_tan2angle(std::atan2(y_is_2 - y_p, x_is - x_p));
 
-        result.emplace_back(angle_1);
-        result.emplace_back(angle_2);
+        result[0] = angle_1;
+        result[1] = angle_2;
     } else {
         double line_k = -line_A / line_B;
         double line_b = -line_C / line_B;
@@ -235,10 +234,9 @@ circle_line_intersection(double x_p, double y_p, const arr_np_c_in& calc_line, i
         double angle_1 = convert_tan2angle(std::atan2(y_is_1 - y_p, x_is_1 - x_p));
         double angle_2 = convert_tan2angle(std::atan2(y_is_2 - y_p, x_is_2 - x_p));
 
-        result.emplace_back(angle_1);
-        result.emplace_back(angle_2);
+        result[0] = angle_1;
+        result[1] = angle_2;
     }
-    return result;
 }
 
 double
@@ -283,59 +281,67 @@ calc_polygon(arr_np_c_in boundary_line,  // line for Ax + By + C = 0, store by A
         double z_p = scan_position(i, 2);
 
         // find all of the discontinuity points' time.
-        set_int dc_step = find_discontinuities(calc_line, calc_corners, x_p, y_p, z_p, dt, c0);
+        set_i dc_step = find_discontinuities(calc_line, calc_corners, x_p, y_p, z_p, dt, c0);
         if ( *(dc_step.begin()) == 0 ) {
             dc_step.erase(dc_step.begin());
         }
-
-        // calculate SIR.
-        set_int::iterator step_end = dc_step.end();
+        // calculate max step.
+        set_i::iterator step_end = dc_step.end();
         step_end--;
         int max_step = *step_end + 10;
 
-        vec_d SIR_data(max_step, 0.0);
-
-        set_int::iterator step_index = dc_step.begin();  // index for calculate intersection steps.
-        vec_i active_edges;                              // store active edges index.
-        vec_vec_i inside_angle;                          // store inside angles index.
-        bool full_arc_flag = false;                      // flag for full arc case.
+        // calculate SIR.
+        vec_d SIR_data(max_step, 0.0);              // store SIR data for this scan position.
+        set_i::iterator step_it = dc_step.begin();  // index for calculate intersection steps.
+        vec_i active_edges;                         // store active edges index.
+        vec_vec_i inside_angle;                     // store inside angles index.
+        bool full_arc_flag = false;                 // flag for full arc case.
 
         for ( int j = *(dc_step.begin()); j <= max_step; ++j ) {
             double pow_r = (c0 * (j * dt)) * (c0 * (j * dt)) - z_p * z_p;
             // loop lines for calculate intersection points and angles.
-            vec_d angles;  // Angles (band line) relative to x axis (origin is scan point).
+            set_d angles;  // Angles (band line) relative to x axis (origin is scan point).
 
             // test plus if and else.
-            if ( j == *step_index ) {
+            if ( j == *step_it ) {
                 active_edges = update_active_edges(calc_line, x_p, y_p, z_p, dt, j, c0);
-                step_index++;
+                step_it++;
                 full_arc_flag = false;
             }
             // loop active edges only.
+            double* intersections_angle = new double[2];
             for ( auto idx : active_edges ) {
-                vec_d intersections_angle = circle_line_intersection(x_p, y_p, calc_line, idx, pow_r);
-                angles.emplace_back(intersections_angle[0]);
-                if ( fabs(intersections_angle[1] - intersections_angle[0]) < EPS_ANGLE ) {
-                    continue;
-                }
-                angles.emplace_back(intersections_angle[1]);
+                circle_line_intersection(x_p, y_p, calc_line, idx, pow_r, intersections_angle);
+                angles.insert(intersections_angle[0]);
+                angles.insert(intersections_angle[1]);
             }
-            // sort angles.
-            std::sort(angles.begin(), angles.end());
-            angles.erase(std::unique(angles.begin(), angles.end()), angles.end());
+            delete[] intersections_angle;
+
             // calculate sum of the angle difference.
             double angle_difference = 0;
             if ( full_arc_flag == true ) {
                 // full arc case.
                 angle_difference += 2 * M_PI;
             } else {
-                for ( int k = 1; k < angles.size(); ++k ) {
-                    // loop angles.
-                    double angle_difference_k = calc_angle_difference(angles[k - 1], angles[k], x_p, y_p, pow_r, inside_direction, boundary_line);
-                    angle_difference += angle_difference_k;
+                set_d::iterator angle_it = angles.begin();
+                for ( angle_it++; angle_it != angles.end(); ++angle_it ) {
+                    double angle_difference_it = calc_angle_difference(*std::prev(angle_it, 1),
+                                                                       *angle_it,
+                                                                       x_p,
+                                                                       y_p,
+                                                                       pow_r,
+                                                                       inside_direction,
+                                                                       boundary_line);
+                    angle_difference += angle_difference_it;
                 }
                 // calcualte last angle.
-                double angle_difference_last = calc_angle_difference(angles.back(), angles.front() + 2 * M_PI, x_p, y_p, pow_r, inside_direction, boundary_line);
+                double angle_difference_last = calc_angle_difference(*angles.rbegin(),
+                                                                     (*angles.begin()) + 2 * M_PI,
+                                                                     x_p,
+                                                                     y_p,
+                                                                     pow_r,
+                                                                     inside_direction,
+                                                                     boundary_line);
                 angle_difference += angle_difference_last;
                 // change full_arc_flag.
                 if ( angle_difference == 2 * M_PI ) {

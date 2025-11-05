@@ -10,8 +10,8 @@ para = Simu_para(1600, 100e6)
 prob = Rect_probe(5e6, 0.8, [0, 0, 0], 3e-3, 5e-3)
 prob.set_subapertures(10, 10)
 
-sca = Linear_scan(0e-3, 6e-3, 4, 0e-3, 0e-3, 1, 0e-3, 5e-3, 2)
+sca = Linear_scan(4e-3, 4e-3, 1, 0e-3, 0e-3, 1, 5e-3, 5e-3, 1)
 
 simulation = calc_SIR(prob, sca, para)
 
-plot_SIR(simulation, para, 5)
+plot_SIR(simulation, para, 0)
