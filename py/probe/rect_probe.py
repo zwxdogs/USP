@@ -1,4 +1,8 @@
 # Single Rectangle probe class.
+
+# line store: y - kx + b and x = c. use array[N_lines, 3]. First column: 0 or 1 for define whether the slope is infinte;
+# second column: k or 0, depending on slope; third column: b or c, depending on slope.
+
 from probe.probe_base import Probe
 import numpy as np
 
@@ -14,10 +18,10 @@ class Rect_probe(Probe):
         self.__line = np.zeros((4, 3))
         self.__line = np.array(
             [
-                [0, 1, -height / 2],  # line_1: y = height/2
-                [1, 0, -width / 2],  # line_2: x = width/2
-                [0, 1, height / 2],  # line_3: y = -height/2
-                [1, 0, width / 2],  # line_4: x = -width/2
+                [0, 0, height / 2],  # line_1: y = height/2
+                [1, 0, width / 2],  # line_2: x = width/2
+                [0, 0, -height / 2],  # line_3: y = -height/2
+                [1, 0, -width / 2],  # line_4: x = -width/2
             ]
         )
         self.__corners = np.array(
@@ -52,7 +56,7 @@ class Rect_probe(Probe):
 
         for i in range(1, N_sub_y):
             self.__inside_line[N_sub_x - 1 + i - 1, 0] = 0
-            self.__inside_line[N_sub_x - 1 + i - 1, 1] = 1
+            self.__inside_line[N_sub_x - 1 + i - 1, 1] = 0
             y_position = -self.__height / 2 + self.__height / N_sub_y * i
             self.__inside_line[N_sub_x - 1 + i - 1, 2] = y_position
 

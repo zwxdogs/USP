@@ -1,4 +1,7 @@
 // Calculate Spatial Impulse Response (SIR).
+// line store: y - kx + b and x = c. use array[N_lines, 3]. First column: 0 or 1 for define whether the slope is infinte;
+// second column: k or 0, depending on slope; third column: b or c, depending on slope.
+
 #include <nanobind/nanobind.h>
 #include <nanobind/ndarray.h>
 #include <vector>
@@ -54,11 +57,13 @@ inside_demarcate(const arr_np_c_in& boundary_line, const arr_np_c_in& boundary_c
     vec_i inside_direction;
     // injudge and store.
     for ( int i = 0; i < boundary_line.shape(0); ++i ) {
-        double line_A = line_data[i * 3 + 0];
-        double line_B = line_data[i * 3 + 1];
-        double line_C = line_data[i * 3 + 2];
+        double injudge_value = 0.0;
+        if ( line_data[i * 3 + 0] == 1 ) {
+            injudge_value = centroid_x - line_data[i * 3 + 2];
+        } else {
+            injudge_value = line_data[i * 3 + 1] * centroid_x + line_data[i * 3 + 2] - centroid_y;
+        }
 
-        double injudge_value = line_A * centroid_x + line_B * centroid_y + line_C;
         if ( injudge_value > 0 ) {
             inside_direction.emplace_back(1);
         } else {
@@ -77,11 +82,13 @@ point_inside_polygon(const vec_i& inside_direction,
     auto* line_data = boundary_line.data();
     // injudge whether the point is inside the polygon.
     for ( int i = 0; i < boundary_line.shape(0); ++i ) {
-        double line_A = line_data[i * 3 + 0];
-        double line_B = line_data[i * 3 + 1];
-        double line_C = line_data[i * 3 + 2];
+        double injudge_value = 0.0;
+        if ( line_data[i * 3 + 0] == 1 ) {
+            injudge_value = x_point - line_data[i * 3 + 2];
+        } else {
+            injudge_value = line_data[i * 3 + 1] * x_point + line_data[i * 3 + 2] - y_point;
+        }
 
-        double injudge_value = line_A * x_point + line_B * y_point + line_C;
         if ( injudge_value * inside_direction[i] <= 0 ) {
             return false;
         }
@@ -106,21 +113,16 @@ update_active_edges(const arr_np_c_in& calc_line,
     double r = c0 * step * dt;
     double r_proj_pow = r * r - z_p * z_p;
     for ( int i = 0; i < calc_line.shape(0); ++i ) {
-        // line parameters: Ax + By + C = 0
-        double line_A = line_data[i * 3 + 0];
-        double line_B = line_data[i * 3 + 1];
-        double line_C = line_data[i * 3 + 2];
-
-        if ( line_B == 0 ) {
+        // line parameters: y = kx + b or x = c
+        if ( line_data[i * 3 + 0] == 1 ) {
             // k = inf
-            double x_l = -line_C / line_A;
+            double x_l = line_data[i * 3 + 2];
             if ( (x_l - x_p) * (x_l - x_p) <= r_proj_pow ) {
                 active_edges.emplace_back(i);
             }
         } else {
-            // line parameter: y = kx + b
-            double line_k = -line_A / line_B;
-            double line_b = -line_C / line_B;
+            double line_k = line_data[i * 3 + 1];
+            double line_b = line_data[i * 3 + 2];
 
             double eq_a = line_k * line_k + 1;
             double eq_b = 2 * line_k * line_b - 2 * x_p - 2 * line_k * y_p;
@@ -167,17 +169,14 @@ find_discontinuities(const arr_np_c_in& calc_line,
         double tmp_t = 0;
         double x_dc = 0.0;
         double y_dc = 0.0;
-        double line_A = line_data[i * 3 + 0];
-        double line_B = line_data[i * 3 + 1];
-        double line_C = line_data[i * 3 + 2];
 
-        if ( line_B == 0 ) {
+        if ( line_data[i * 3 + 0] == 1 ) {
             // k = inf
-            x_dc = -line_C / line_A;
+            x_dc = line_data[i * 3 + 2];
             y_dc = y_p;
         } else {
-            double line_k = -line_A / line_B;
-            double line_b = -line_C / line_B;
+            double line_k = line_data[i * 3 + 1];
+            double line_b = line_data[i * 3 + 2];
 
             x_dc = (line_k * y_p + x_p - line_k * line_b) / (line_k * line_k + 1);
             y_dc = line_k * x_dc + line_b;
@@ -198,13 +197,10 @@ void
 circle_line_intersection(double x_p, double y_p, const arr_np_c_in& calc_line, int idx, double pow_r, double result[2])
 {
     auto* line_data = calc_line.data();
-    double line_A = line_data[idx * 3 + 0];
-    double line_B = line_data[idx * 3 + 1];
-    double line_C = line_data[idx * 3 + 2];
     // calculate intersection (convert to angle) points between circle and line.
-    if ( line_B == 0 ) {
+    if ( line_data[idx * 3 + 0] == 1 ) {
         // k = inf
-        double x_is = -line_C / line_A;
+        double x_is = line_data[idx * 3 + 2];
         // calculate y_is by quadratic equation.
         double eq_a = 1;
         double eq_b = -2 * y_p;
@@ -219,8 +215,8 @@ circle_line_intersection(double x_p, double y_p, const arr_np_c_in& calc_line, i
         result[0] = angle_1;
         result[1] = angle_2;
     } else {
-        double line_k = -line_A / line_B;
-        double line_b = -line_C / line_B;
+        double line_k = line_data[idx * 3 + 1];
+        double line_b = line_data[idx * 3 + 2];
         // calculate x_is by quadratic equation.
         double eq_a = line_k * line_k + 1;
         double eq_b = 2 * line_k * line_b - 2 * x_p - 2 * line_k * y_p;
