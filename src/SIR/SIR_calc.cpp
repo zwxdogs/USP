@@ -10,9 +10,10 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <set>
+#include <cfloat>
 #include <iostream>
 
-#define EPS_ANGLE 1e-10
+// #define EPS_ANGLE 1e-10
 
 namespace nb = nanobind;
 using arr_np_c_in = nb::ndarray<double, nb::numpy, nb::c_contig, nb::shape<-1, 3>>;
@@ -35,8 +36,8 @@ convert_tan2angle(double angle)
     return convert_angle;
 }
 
-vec_i
-inside_demarcate(const arr_np_c_in& boundary_line, const arr_np_c_in& boundary_corners)
+void
+inside_demarcate(const arr_np_c_in& boundary_line, const arr_np_c_in& boundary_corners, int* inside_direction)
 {
     // Injudge which direction about the lines is inside the polygon.
 
@@ -54,27 +55,21 @@ inside_demarcate(const arr_np_c_in& boundary_line, const arr_np_c_in& boundary_c
     centroid_x /= boundary_corners.shape(0);
     centroid_y /= boundary_corners.shape(0);
 
-    vec_i inside_direction;
     // injudge and store.
     for ( int i = 0; i < boundary_line.shape(0); ++i ) {
         double injudge_value = 0.0;
-        if ( line_data[i * 3 + 0] == 1 ) {
+        if ( (int)line_data[i * 3 + 0] == 1 ) {
             injudge_value = centroid_x - line_data[i * 3 + 2];
         } else {
             injudge_value = line_data[i * 3 + 1] * centroid_x + line_data[i * 3 + 2] - centroid_y;
         }
 
-        if ( injudge_value > 0 ) {
-            inside_direction.emplace_back(1);
-        } else {
-            inside_direction.emplace_back(-1);
-        }
+        inside_direction[i] = (injudge_value > 0) ? 1 : -1;
     }
-    return inside_direction;
 }
 
 bool
-point_inside_polygon(const vec_i& inside_direction,
+point_inside_polygon(const int* inside_direction,
                      const arr_np_c_in& boundary_line,
                      double x_point,
                      double y_point)
@@ -83,13 +78,13 @@ point_inside_polygon(const vec_i& inside_direction,
     // injudge whether the point is inside the polygon.
     for ( int i = 0; i < boundary_line.shape(0); ++i ) {
         double injudge_value = 0.0;
-        if ( line_data[i * 3 + 0] == 1 ) {
+        if ( (int)line_data[i * 3 + 0] == 1 ) {
             injudge_value = x_point - line_data[i * 3 + 2];
         } else {
             injudge_value = line_data[i * 3 + 1] * x_point + line_data[i * 3 + 2] - y_point;
         }
 
-        if ( injudge_value * inside_direction[i] <= 0 ) {
+        if ( injudge_value * inside_direction[i] < 0 ) {
             return false;
         }
     }
@@ -114,10 +109,10 @@ update_active_edges(const arr_np_c_in& calc_line,
     double r_proj_pow = r * r - z_p * z_p;
     for ( int i = 0; i < calc_line.shape(0); ++i ) {
         // line parameters: y = kx + b or x = c
-        if ( line_data[i * 3 + 0] == 1 ) {
+        if ( (int)line_data[i * 3 + 0] == 1 ) {
             // k = inf
             double x_l = line_data[i * 3 + 2];
-            if ( (x_l - x_p) * (x_l - x_p) <= r_proj_pow ) {
+            if ( ((x_l - x_p) * (x_l - x_p) < r_proj_pow) || fabs((x_l - x_p) * (x_l - x_p) - r_proj_pow) < DBL_EPSILON ) {
                 active_edges.emplace_back(i);
             }
         } else {
@@ -129,7 +124,7 @@ update_active_edges(const arr_np_c_in& calc_line,
             double eq_c = y_p * y_p + x_p * x_p + line_b * line_b - 2 * line_b * y_p - r_proj_pow;
             double eq_delta = eq_b * eq_b - 4 * eq_a * eq_c;
             // Delta >= 0 means intersection exists.
-            if ( eq_delta >= 0 ) {
+            if ( (eq_delta > 0) || (fabs(eq_delta) < DBL_EPSILON) ) {
                 active_edges.emplace_back(i);
             }
         }
@@ -170,7 +165,7 @@ find_discontinuities(const arr_np_c_in& calc_line,
         double x_dc = 0.0;
         double y_dc = 0.0;
 
-        if ( line_data[i * 3 + 0] == 1 ) {
+        if ( (int)line_data[i * 3 + 0] == 1 ) {
             // k = inf
             x_dc = line_data[i * 3 + 2];
             y_dc = y_p;
@@ -194,11 +189,11 @@ find_discontinuities(const arr_np_c_in& calc_line,
 }
 
 void
-circle_line_intersection(double x_p, double y_p, const arr_np_c_in& calc_line, int idx, double pow_r, double result[2])
+circle_line_intersection(double x_p, double y_p, const arr_np_c_in& calc_line, int idx, double pow_r, double* result)
 {
     auto* line_data = calc_line.data();
     // calculate intersection (convert to angle) points between circle and line.
-    if ( line_data[idx * 3 + 0] == 1 ) {
+    if ( (int)line_data[idx * 3 + 0] == 1 ) {
         // k = inf
         double x_is = line_data[idx * 3 + 2];
         // calculate y_is by quadratic equation.
@@ -241,7 +236,7 @@ calc_angle_difference(double angle_now,
                       double x_p,
                       double y_p,
                       double pow_r,
-                      const vec_i& inside_direction,
+                      const int* inside_direction,
                       const arr_np_c_in& boundary_line)
 {
     // calculate angle difference between two angles.
@@ -267,7 +262,8 @@ calc_polygon(arr_np_c_in boundary_line,  // line for Ax + By + C = 0, store by A
              double c0)
 {
     // injudge which direction about the lines is inside the polygon.
-    vec_i inside_direction = inside_demarcate(boundary_line, boundary_corners);
+    int* inside_direction = new int[boundary_line.shape(0)];
+    inside_demarcate(boundary_line, boundary_corners, inside_direction);
 
     vec_vec_d SIR_result;
     // loop all of the scan positions
@@ -278,7 +274,7 @@ calc_polygon(arr_np_c_in boundary_line,  // line for Ax + By + C = 0, store by A
 
         // find all of the discontinuity points' time.
         set_i dc_step = find_discontinuities(calc_line, calc_corners, x_p, y_p, z_p, dt, c0);
-        if ( *(dc_step.begin()) == 0 ) {
+        if ( *dc_step.begin() == 0 ) {
             dc_step.erase(dc_step.begin());
         }
         // calculate max step.
@@ -340,7 +336,7 @@ calc_polygon(arr_np_c_in boundary_line,  // line for Ax + By + C = 0, store by A
                                                                      boundary_line);
                 angle_difference += angle_difference_last;
                 // change full_arc_flag.
-                if ( angle_difference == 2 * M_PI ) {
+                if ( fabs(angle_difference - 2 * M_PI) < DBL_EPSILON ) {
                     full_arc_flag = true;
                 }
             }
@@ -351,6 +347,7 @@ calc_polygon(arr_np_c_in boundary_line,  // line for Ax + By + C = 0, store by A
         SIR_result.emplace_back(SIR_data);
     }
 
+    delete[] inside_direction;
     return SIR_result;
 }
 
