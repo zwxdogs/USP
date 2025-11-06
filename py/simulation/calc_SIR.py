@@ -2,7 +2,8 @@
 import simulation.tools.SIR_calc as SIR_cpp
 
 
-def calc_SIR(probe, scan, para):
+def calc_SIR(probe, scan, para, apo_switch):
+    apo_switch_value = apo_switch.value
     # Call C++ extension for calculation
     match probe.get_symbol():
         case "rect":
@@ -14,6 +15,7 @@ def calc_SIR(probe, scan, para):
                 scan.get_scan_xyz(),
                 para.get_dt(),
                 para.get_c0(),
+                apo_switch_value,
             )
 
         case _:

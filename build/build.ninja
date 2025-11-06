@@ -49,13 +49,13 @@ cmake_ninja_workdir = /home/zwxdogs/work/USP/build/
 
 build cmake_object_order_depends_target_linear_mesh: phony || cmake_object_order_depends_target_nanobind-static
 
-build CMakeFiles/linear_mesh.dir/src/tools/linear_mesh.cpp.o: CXX_COMPILER__linear_mesh_Debug /home/zwxdogs/work/USP/src/tools/linear_mesh.cpp || cmake_object_order_depends_target_linear_mesh
+build CMakeFiles/linear_mesh.dir/src/scan/linear_mesh.cpp.o: CXX_COMPILER__linear_mesh_Debug /home/zwxdogs/work/USP/src/scan/linear_mesh.cpp || cmake_object_order_depends_target_linear_mesh
   DEFINES = -Dlinear_mesh_EXPORTS
-  DEP_FILE = CMakeFiles/linear_mesh.dir/src/tools/linear_mesh.cpp.o.d
+  DEP_FILE = CMakeFiles/linear_mesh.dir/src/scan/linear_mesh.cpp.o.d
   FLAGS = -g -fPIC -fvisibility=hidden
   INCLUDES = -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include
   OBJECT_DIR = CMakeFiles/linear_mesh.dir
-  OBJECT_FILE_DIR = CMakeFiles/linear_mesh.dir/src/tools
+  OBJECT_FILE_DIR = CMakeFiles/linear_mesh.dir/src/scan
 
 
 # =============================================================================
@@ -65,7 +65,7 @@ build CMakeFiles/linear_mesh.dir/src/tools/linear_mesh.cpp.o: CXX_COMPILER__line
 #############################################
 # Link the shared module linear_mesh.cpython-310-x86_64-linux-gnu.so
 
-build linear_mesh.cpython-310-x86_64-linux-gnu.so: CXX_MODULE_LIBRARY_LINKER__linear_mesh_Debug CMakeFiles/linear_mesh.dir/src/tools/linear_mesh.cpp.o | libnanobind-static.a || libnanobind-static.a
+build linear_mesh.cpython-310-x86_64-linux-gnu.so: CXX_MODULE_LIBRARY_LINKER__linear_mesh_Debug CMakeFiles/linear_mesh.dir/src/scan/linear_mesh.cpp.o | libnanobind-static.a || libnanobind-static.a
   LANGUAGE_COMPILE_FLAGS = -g
   LINK_LIBRARIES = libnanobind-static.a
   OBJECT_DIR = CMakeFiles/linear_mesh.dir
@@ -185,13 +185,13 @@ build libnanobind-static.a: CXX_STATIC_LIBRARY_LINKER__nanobind-static_Debug CMa
 
 build cmake_object_order_depends_target_SIR_calc: phony || cmake_object_order_depends_target_nanobind-static
 
-build CMakeFiles/SIR_calc.dir/src/SIR/SIR_calc.cpp.o: CXX_COMPILER__SIR_calc_Debug /home/zwxdogs/work/USP/src/SIR/SIR_calc.cpp || cmake_object_order_depends_target_SIR_calc
+build CMakeFiles/SIR_calc.dir/src/simulation/SIR/SIR_calc.cpp.o: CXX_COMPILER__SIR_calc_Debug /home/zwxdogs/work/USP/src/simulation/SIR/SIR_calc.cpp || cmake_object_order_depends_target_SIR_calc
   DEFINES = -DSIR_calc_EXPORTS
-  DEP_FILE = CMakeFiles/SIR_calc.dir/src/SIR/SIR_calc.cpp.o.d
+  DEP_FILE = CMakeFiles/SIR_calc.dir/src/simulation/SIR/SIR_calc.cpp.o.d
   FLAGS = -g -fPIC -fvisibility=hidden
   INCLUDES = -I/usr/include/python3.10 -I/home/zwxdogs/work/USP/.venv/lib/python3.10/site-packages/nanobind/include
   OBJECT_DIR = CMakeFiles/SIR_calc.dir
-  OBJECT_FILE_DIR = CMakeFiles/SIR_calc.dir/src/SIR
+  OBJECT_FILE_DIR = CMakeFiles/SIR_calc.dir/src/simulation/SIR
 
 
 # =============================================================================
@@ -201,7 +201,7 @@ build CMakeFiles/SIR_calc.dir/src/SIR/SIR_calc.cpp.o: CXX_COMPILER__SIR_calc_Deb
 #############################################
 # Link the shared module SIR_calc.cpython-310-x86_64-linux-gnu.so
 
-build SIR_calc.cpython-310-x86_64-linux-gnu.so: CXX_MODULE_LIBRARY_LINKER__SIR_calc_Debug CMakeFiles/SIR_calc.dir/src/SIR/SIR_calc.cpp.o | libnanobind-static.a || libnanobind-static.a
+build SIR_calc.cpython-310-x86_64-linux-gnu.so: CXX_MODULE_LIBRARY_LINKER__SIR_calc_Debug CMakeFiles/SIR_calc.dir/src/simulation/SIR/SIR_calc.cpp.o | libnanobind-static.a || libnanobind-static.a
   LANGUAGE_COMPILE_FLAGS = -g
   LINK_LIBRARIES = libnanobind-static.a
   OBJECT_DIR = CMakeFiles/SIR_calc.dir

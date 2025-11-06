@@ -12,6 +12,7 @@
 #include <set>
 #include <cfloat>
 #include <iostream>
+#include "../apodization.h"
 
 // #define EPS_ANGLE 1e-10
 
@@ -20,10 +21,9 @@ using arr_np_c_in = nb::ndarray<double, nb::numpy, nb::c_contig, nb::shape<-1, 3
 using arr_np_c_out = nb::ndarray<double, nb::numpy, nb::c_contig>;
 using vec_d = std::vector<double>;
 using vec_i = std::vector<int>;
-using vec_vec_d = std::vector<vec_d>;
-using vec_vec_i = std::vector<vec_i>;
 using set_i = std::set<int>;
 using set_d = std::set<double>;
+using vec_set_i = std::vector<set_i>;
 
 double
 convert_tan2angle(double angle)
@@ -58,7 +58,7 @@ inside_demarcate(const arr_np_c_in& boundary_line, const arr_np_c_in& boundary_c
     // injudge and store.
     for ( int i = 0; i < boundary_line.shape(0); ++i ) {
         double injudge_value = 0.0;
-        if ( (int)line_data[i * 3 + 0] == 1 ) {
+        if ( static_cast<int>(line_data[i * 3 + 0] == 1) ) {
             injudge_value = centroid_x - line_data[i * 3 + 2];
         } else {
             injudge_value = line_data[i * 3 + 1] * centroid_x + line_data[i * 3 + 2] - centroid_y;
@@ -78,7 +78,7 @@ point_inside_polygon(const int* inside_direction,
     // injudge whether the point is inside the polygon.
     for ( int i = 0; i < boundary_line.shape(0); ++i ) {
         double injudge_value = 0.0;
-        if ( (int)line_data[i * 3 + 0] == 1 ) {
+        if ( static_cast<int>(line_data[i * 3 + 0] == 1) ) {
             injudge_value = x_point - line_data[i * 3 + 2];
         } else {
             injudge_value = line_data[i * 3 + 1] * x_point + line_data[i * 3 + 2] - y_point;
@@ -109,7 +109,7 @@ update_active_edges(const arr_np_c_in& calc_line,
     double r_proj_pow = r * r - z_p * z_p;
     for ( int i = 0; i < calc_line.shape(0); ++i ) {
         // line parameters: y = kx + b or x = c
-        if ( (int)line_data[i * 3 + 0] == 1 ) {
+        if ( static_cast<int>(line_data[i * 3 + 0] == 1) ) {
             // k = inf
             double x_l = line_data[i * 3 + 2];
             if ( ((x_l - x_p) * (x_l - x_p) < r_proj_pow) || fabs((x_l - x_p) * (x_l - x_p) - r_proj_pow) < DBL_EPSILON ) {
@@ -165,7 +165,7 @@ find_discontinuities(const arr_np_c_in& calc_line,
         double x_dc = 0.0;
         double y_dc = 0.0;
 
-        if ( (int)line_data[i * 3 + 0] == 1 ) {
+        if ( static_cast<int>(line_data[i * 3 + 0] == 1) ) {
             // k = inf
             x_dc = line_data[i * 3 + 2];
             y_dc = y_p;
@@ -193,7 +193,7 @@ circle_line_intersection(double x_p, double y_p, const arr_np_c_in& calc_line, i
 {
     auto* line_data = calc_line.data();
     // calculate intersection (convert to angle) points between circle and line.
-    if ( (int)line_data[idx * 3 + 0] == 1 ) {
+    if ( static_cast<int>(line_data[idx * 3 + 0] == 1) ) {
         // k = inf
         double x_is = line_data[idx * 3 + 2];
         // calculate y_is by quadratic equation.
@@ -252,44 +252,60 @@ calc_angle_difference(double angle_now,
     return tmp_angle_difference;
 }
 
-vec_vec_d
+arr_np_c_out
 calc_polygon(arr_np_c_in boundary_line,  // line for Ax + By + C = 0, store by A、B、C.
              arr_np_c_in calc_line,
              arr_np_c_in boundary_corners,
              arr_np_c_in calc_corners,
              arr_np_c_in scan_position,
              double dt,
-             double c0)
+             double c0,
+             int apo_switch)
 {
-    // injudge which direction about the lines is inside the polygon.
-    int* inside_direction = new int[boundary_line.shape(0)];
-    inside_demarcate(boundary_line, boundary_corners, inside_direction);
-
-    vec_vec_d SIR_result;
-    // loop all of the scan positions
+    vec_set_i dc_step;
+    int max_step = 0;
+    // loop to find max_step for pre-allocation.
     for ( int i = 0; i < scan_position.shape(0); ++i ) {
         double x_p = scan_position(i, 0);
         double y_p = scan_position(i, 1);
         double z_p = scan_position(i, 2);
 
         // find all of the discontinuity points' time.
-        set_i dc_step = find_discontinuities(calc_line, calc_corners, x_p, y_p, z_p, dt, c0);
-        if ( *dc_step.begin() == 0 ) {
-            dc_step.erase(dc_step.begin());
+        set_i step_it = find_discontinuities(calc_line, calc_corners, x_p, y_p, z_p, dt, c0);
+        if ( *step_it.begin() == 0 ) {
+            step_it.erase(step_it.begin());
         }
         // calculate max step.
-        set_i::iterator step_end = dc_step.end();
-        step_end--;
-        int max_step = *step_end + 10;
+        if ( *step_it.rbegin() > max_step ) {
+            max_step = *step_it.rbegin();
+        }
+
+        dc_step.emplace_back(step_it);
+    }
+    max_step += 5;  // extra 5 steps.
+    // pre-allocate data. Cols is scan positions, rows is time steps.
+    double* SIR_data = new double[(max_step + 1) * scan_position.shape(0)]();
+
+    // injudge which direction about the lines is inside the polygon.
+    int* inside_direction = new int[boundary_line.shape(0)]();
+    inside_demarcate(boundary_line, boundary_corners, inside_direction);
+
+    // loop all of the scan positions
+    for ( int i = 0; i < scan_position.shape(0); ++i ) {
+        double x_p = scan_position(i, 0);
+        double y_p = scan_position(i, 1);
+        double z_p = scan_position(i, 2);
+
+        set_i dc_step_this = dc_step[i];
 
         // calculate SIR.
-        vec_d SIR_data(max_step, 0.0);              // store SIR data for this scan position.
-        set_i::iterator step_it = dc_step.begin();  // index for calculate intersection steps.
-        vec_i active_edges;                         // store active edges index.
-        vec_vec_i inside_angle;                     // store inside angles index.
-        bool full_arc_flag = false;                 // flag for full arc case.
-
-        for ( int j = *(dc_step.begin()); j <= max_step; ++j ) {
+        set_i::iterator step_it = dc_step_this.begin();  // index for calculate intersection steps.
+        vec_i active_edges;                              // store active edges index.
+        bool full_arc_flag = false;                      // flag for full arc case.
+        // apodization flag.
+        int apo_start = 0;
+        int apo_end = 0;
+        for ( int j = *dc_step_this.begin(); j <= max_step; ++j ) {
             double pow_r = (c0 * (j * dt)) * (c0 * (j * dt)) - z_p * z_p;
             // loop lines for calculate intersection points and angles.
             set_d angles;  // Angles (band line) relative to x axis (origin is scan point).
@@ -309,46 +325,70 @@ calc_polygon(arr_np_c_in boundary_line,  // line for Ax + By + C = 0, store by A
             }
             delete[] intersections_angle;
 
-            // calculate sum of the angle difference.
-            double angle_difference = 0;
+            // calculate angle difference.
+            double angle_diff_all = 0.0;
             if ( full_arc_flag == true ) {
                 // full arc case.
-                angle_difference += 2 * M_PI;
+                angle_diff_all = 2 * M_PI;
             } else {
                 set_d::iterator angle_it = angles.begin();
                 for ( angle_it++; angle_it != angles.end(); ++angle_it ) {
-                    double angle_difference_it = calc_angle_difference(*std::prev(angle_it, 1),
-                                                                       *angle_it,
-                                                                       x_p,
-                                                                       y_p,
-                                                                       pow_r,
-                                                                       inside_direction,
-                                                                       boundary_line);
-                    angle_difference += angle_difference_it;
+                    double angle_diff_it = calc_angle_difference(*std::prev(angle_it, 1),
+                                                                 *angle_it,
+                                                                 x_p,
+                                                                 y_p,
+                                                                 pow_r,
+                                                                 inside_direction,
+                                                                 boundary_line);
+                    angle_diff_all += angle_diff_it;
                 }
                 // calcualte last angle.
-                double angle_difference_last = calc_angle_difference(*angles.rbegin(),
-                                                                     (*angles.begin()) + 2 * M_PI,
-                                                                     x_p,
-                                                                     y_p,
-                                                                     pow_r,
-                                                                     inside_direction,
-                                                                     boundary_line);
-                angle_difference += angle_difference_last;
-                // change full_arc_flag.
-                if ( fabs(angle_difference - 2 * M_PI) < DBL_EPSILON ) {
-                    full_arc_flag = true;
-                }
+                double angle_diff_last = calc_angle_difference(*angles.rbegin(),
+                                                               *angles.begin() + 2 * M_PI,
+                                                               x_p,
+                                                               y_p,
+                                                               pow_r,
+                                                               inside_direction,
+                                                               boundary_line);
+                angle_diff_all += angle_diff_last;
+            }
+            // change full_arc_flag.
+            if ( fabs(angle_diff_all - 2 * M_PI) < DBL_EPSILON ) {
+                full_arc_flag = true;
             }
             // write data in this step.
-            SIR_data[j - 1] = angle_difference / (2 * M_PI) * c0;
+            double SIR_data_value = angle_diff_all / (2 * M_PI) * c0;
+            // apodization process.
+            if ( SIR_data_value && (apo_start == 0) ) {
+                apo_start = j;
+            }
+            if ( (SIR_data_value < DBL_EPSILON) && (apo_start != 0) && (apo_end == 0) ) {
+                apo_end = j;
+            }
+            // write SIR data value.
+            SIR_data[i + j * scan_position.shape(0)] = SIR_data_value;
         }
-        // write data in this scan position.
-        SIR_result.emplace_back(SIR_data);
-    }
+        // apodization process.
+        int apo_length = apo_end - apo_start;  // include start and not include end.
+        double* apo_vec = new double[apo_length];
+        apo_calc(apo_length, apo_switch, apo_vec);
 
+        for ( int j = apo_start; j < apo_end; ++j ) {
+            SIR_data[i + j * scan_position.shape(0)] *= apo_vec[j - apo_start];
+        }
+
+        delete[] apo_vec;
+    }
     delete[] inside_direction;
-    return SIR_result;
+
+    nb::capsule owner(SIR_data,
+                      [](void* p) noexcept {
+                          delete[] (double*)p;
+                      });
+    std::initializer_list<size_t> shape = {(size_t)(max_step + 1),
+                                           (size_t)scan_position.shape(0)};
+
+    return arr_np_c_out(SIR_data, shape, owner);
 }
 
 NB_MODULE(SIR_calc, m)

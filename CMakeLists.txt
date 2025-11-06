@@ -22,8 +22,8 @@ file(GLOB SRC_FILES
     "${PROJECT_SOURCE_DIR}/src/*.h"
     "${PROJECT_SOURCE_DIR}/src/*.cpp")
 
-nanobind_add_module(linear_mesh src/tools/linear_mesh.cpp)
-nanobind_add_module(SIR_calc src/SIR/SIR_calc.cpp)
+nanobind_add_module(linear_mesh src/scan/linear_mesh.cpp)
+nanobind_add_module(SIR_calc src/simulation/SIR/SIR_calc.cpp)
 
 # nanobind_add_module(test src/test.cpp)
 
